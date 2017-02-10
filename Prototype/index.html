@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+* {box-sizing: border-box;}
+body {font-family: verdana; color: #333333; font-size: 10pt;}
+div {padding: 10px;}
+h1 {font-size: 16pt; line-height: 10pt; text-align: center;}
+h2 {font-size: 12pt; text-align: center;}
+button {
+	width: 100%;
+	padding: 10px;
+	margin: 5px auto;
+	text-align: center;
+	background-color: #aaaaaa;
+	color: white;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	border: none;
+	border-radius: 10px;
+	outline: none;
+}
+button:hover {background-color: #bbbbbb;}
+#cancel {width: 150px; margin: 10px auto;}
+.console {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 250px;
+	background-color: #888888;
+	border-right: 2px solid #444444;
+	text-align: center;
+}
+#options {padding: 10px;}
+#place-ships {display: none;}
+#place-ships ul {
+	width: 150px;
+	list-style-type: none;
+	padding: 5px;
+	margin: 5px auto;
+	background-color: #aaaaaa;
+	border-radius: 10px;
+}
+.container {
+	position: fixed;
+	top: 150px; left: 300px;
+	width: 1300px;
+	text-align: center;
+	overflow: auto;
+}
+.controller {
+	height: 450px;
+	width: 250px;
+	margin: 0 10px;
+	float: left;
+}
+.messages {
+	margin: 0 auto 10px auto;
+	height: 125px;
+	text-align: left;
+	background-color: #bbbbbb;
+	border: 2px solid #444444;
+	border-radius: 10px;
+}
+.alert {float: left;}
+.controls {
+	height: 300px;
+	background-color: #888888;
+	border: 2px solid #444444;
+	border-radius: 10px;
+}
+.board {
+	height: 450px;
+	width: 450px;
+	margin: 0 auto;
+	border: 2px solid #444444;
+	border-radius: 10px;
+	float: left;
+}
+.cpu {background-color: #ceb3b3;}
+.plyr {background-color: #b3ceba;}
+.grid {
+	margin: 0 auto;
+	height: 350px;
+	width: 350px;
+	background-color: #dddddd;
+	border: 2px dotted #888888;
+}
+.shots {
+	width: 200px;
+	margin: 4px auto;
+	background-color: #dddddd;
+	border-radius: 10px;
+	overflow: auto;
+}
+.hits, .misses {padding: 0; font-size: 10pt;}
+.hits {float: left;}
+.misses {float: right;}
+	</style>
+	
+	<script>
+	function placeShips() {
+    	div = document.getElementById('place-ships');
+    	div.style.display = "block";
+	}
+	function cancelShips() {
+		div = document.getElementById('place-ships');
+		div.style.display = "none";
+	}
+	function error() {
+		alert("I'm an error message. I can be styled if you're interested in a small external framework. Check out SweetAlert");
+	}
+	</script>
+	
+	<title>Battleship</title>
+</head>
+
+<body>
+	<div class="console">
+		<div id="options">
+			<h1>Console</h1>
+				<button id="new" onclick="javascript:placeShips();">New Game</button>
+			<div id="place-ships">
+				<ul style="text-align: left;"><h2>Orientation</h2>
+					<li>
+					<input id="horizontal" type="radio" name="place" value="horizontal"></input>
+					<label for="horizontal">Horizontal</label>
+					</li>
+					<li>
+					<input id="vertical" type="radio" name="place" value="vertical"></input>
+					<label for="vertical">Vertical</label>
+					</li>
+				</ul>
+				<ul><h2>Ships</h2>
+					<select name="Ships">
+						<option value="carrier">Carrier</option>
+						<option value="battleship">Battleship</option>
+						<option value="cruiser">Cruiser</option>
+						<option value="frigate">Frigate</option>
+					</select>
+				</ul>
+				<button id="place">Place</button>
+				<button id="cancel" onclick="javascript:cancelShips();">Cancel</button>
+			</div>
+		</div>
+	<div class="container">
+	<div class="board plyr">
+		<h1>Player</h1>
+		<div class="grid">make me beautiful</div>
+		<div class="shots">
+			<div class="hits">Hits: <span id="plyr-hits">3</span></div>
+			<div class="misses">Misses: <span id="plyr-misses">5</span></div>
+		</div>
+	</div>
+	<div class="controller">
+		<div class="messages">
+			<h1>Messages</h1>
+			<span id="alert" class="alert">I'm a message set as a span object. I should be easily targetable by javascript.</span>
+		</div>
+		<div class="controls">
+			<h1>Controls</h1>
+			<button id="scan" onclick="error()">Scan</button>
+			<button id="fire">Fire</button>
+		</div>
+	</div>
+	<div class="board cpu">
+		<h1>Opponent</h1>
+		<div class="grid">make me functional</div>
+		<div class="shots">
+			<div class="hits">Hits: <span id="cpu-hits">2</span></div>
+			<div class="misses">Misses: <span id="cpu-misses">5</span></div>
+		</div>
+	</div>
+</body>
+</html>
