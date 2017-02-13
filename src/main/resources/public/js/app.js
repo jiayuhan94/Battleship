@@ -21,7 +21,7 @@ function scan() {
     console.log($( "#colFire" ).val());
 //var menuId = $( "ul.nav" ).first().attr( "id" );
     var request = $.ajax({
-        url: "/scan/"+$( "#rowFire" ).val()+"/"+$( "#colFire" ).val(),
+        url: "/scan/"+$( "#rowScan" ).val()+"/"+$( "#colScan" ).val(),
         method: "post",
         data: JSON.stringify(gameModel),
         contentType: "application/json; charset=utf-8",
@@ -31,14 +31,15 @@ function scan() {
    request.done(function( currModel ) {
      displayGameState(currModel);
      gameModel = currModel;
-     return results;
+     //test purpose
+       alert("this works")
+//     return results;
 
    });
 
    request.fail(function( jqXHR, textStatus ) {
      alert( "Request failed: " + textStatus );
    });
-
 
 //    alert("I'm an error message. I can be styled if you're interested in a small external framework. Check out SweetAlert");
 }
