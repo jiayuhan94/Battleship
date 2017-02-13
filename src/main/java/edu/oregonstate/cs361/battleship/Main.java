@@ -78,6 +78,30 @@ public class Main {
 
     }
 
+    private static String Scan(Request req) {
 
+        BattleshipModel currModel = getModelFromReq(req);
+        String results;
+        String row = req.params("row");
+        String col = req.params("col");
+        int rowInt = Integer.parseInt(row);
+        int colInt = Integer.parseInt(col);
+
+        if (currModel.scanPlayer(rowInt,colInt)){
+            results = "Yes";
+        }else if(colInt > 1 && currModel.scanPlayer(rowInt,colInt-1)){
+            results = "Yes";
+        }else if(rowInt > 1 && currModel.scanPlayer(rowInt-1,colInt)){
+            results = "Yes";
+        }else if(colInt < 10 && currModel.scanPlayer(rowInt,colInt+1)){
+            results = "Yes";
+        }else if(rowInt < 10 && currModel.scanPlayer(rowInt+1,colInt)){
+            results = "Yes";
+        }else{
+            results = "No";
+        }
+
+        return results;
+    }
 
 }

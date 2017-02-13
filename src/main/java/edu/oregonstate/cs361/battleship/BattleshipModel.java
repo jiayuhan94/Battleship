@@ -27,7 +27,6 @@ public class BattleshipModel {
     private ArrayList<Coordinate> computerMisses;
 
 
-
     public BattleshipModel() {
         playerHits = new ArrayList<>();
         playerMisses= new ArrayList<>();
@@ -132,6 +131,23 @@ public class BattleshipModel {
             playerHits.add(coor);
         } else {
             playerMisses.add(coor);
+        }
+    }
+
+    public boolean scanPlayer(int row, int col ) {
+        Coordinate coor = new Coordinate(row,col);
+        if(computer_aircraftCarrier.covers(coor)){
+            return true;
+        }else if (computer_battleship.covers(coor)){
+            return true;
+        }else if (computer_cruiser.covers(coor)){
+            return true;
+        }else if (computer_destroyer.covers(coor)){
+            return true;
+        }else if (computer_submarine.covers(coor)){
+            return true;
+        } else {
+            return false;
         }
     }
 }
