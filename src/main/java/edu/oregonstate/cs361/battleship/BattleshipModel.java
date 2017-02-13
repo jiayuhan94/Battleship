@@ -1,7 +1,6 @@
 package edu.oregonstate.cs361.battleship;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -25,6 +24,8 @@ public class BattleshipModel {
     private ArrayList<Coordinate> playerMisses;
     private ArrayList<Coordinate> computerHits;
     private ArrayList<Coordinate> computerMisses;
+
+    public String results;
 
 
     public BattleshipModel() {
