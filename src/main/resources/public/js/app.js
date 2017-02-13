@@ -8,15 +8,27 @@ $( document ).ready(function() {
    });
 });
 
+function placeShips() {
+    	div = document.getElementById('place-ships');
+    	div.style.display = "block";
+	}
+function cancelShips() {
+    div = document.getElementById('place-ships');
+    div.style.display = "none";
+}
+function error() {
+    alert("I'm an error message. I can be styled if you're interested in a small external framework. Check out SweetAlert");
+}
+
 function placeShip() {
    console.log($( "#shipSelec" ).val());
    console.log($( "#rowSelec" ).val());
    console.log($( "#colSelec" ).val());
-   console.log($( "#orientationSelec" ).val());
+   console.log($("input[name='orientationSelec']:checked").val());
 
    //var menuId = $( "ul.nav" ).first().attr( "id" );
    var request = $.ajax({
-     url: "/placeShip/"+$( "#shipSelec" ).val()+"/"+$( "#rowSelec" ).val()+"/"+$( "#colSelec" ).val()+"/"+$( "#orientationSelec" ).val(),
+     url: "/placeShip/"+$( "#shipSelec" ).val()+"/"+$( "#rowSelec" ).val()+"/"+$( "#colSelec" ).val()+"/"+$("input[name='orientationSelec']:checked").val(),
      method: "post",
      data: JSON.stringify(gameModel),
      contentType: "application/json; charset=utf-8",
