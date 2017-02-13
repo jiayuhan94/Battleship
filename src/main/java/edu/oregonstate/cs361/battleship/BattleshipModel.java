@@ -27,7 +27,6 @@ public class BattleshipModel {
     private ArrayList<Coordinate> computerMisses;
 
 
-
     public BattleshipModel() {
         playerHits = new ArrayList<>();
         playerMisses= new ArrayList<>();
@@ -45,7 +44,7 @@ public class BattleshipModel {
             return aircraftCarrier;
         } if(shipName.equalsIgnoreCase("battleship")) {
             return battleship;
-        } if(shipName.equalsIgnoreCase("Cruiser")) {
+        } if(shipName.equalsIgnoreCase("cruiser")) {
         return cruiser;
         } if(shipName.equalsIgnoreCase("destroyer")) {
             return destroyer;
@@ -61,28 +60,28 @@ public class BattleshipModel {
         int colInt = Integer.parseInt(col);
         if(orientation.equals("horizontal")){
             if (shipName.equalsIgnoreCase("aircraftcarrier")) {
-                currModel.getShip(shipName).setLocation(new Coordinate(rowint,colInt),new Coordinate(rowint,colInt+5));
-            } if(shipName.equalsIgnoreCase("battleship")) {
                 currModel.getShip(shipName).setLocation(new Coordinate(rowint,colInt),new Coordinate(rowint,colInt+4));
-            } if(shipName.equalsIgnoreCase("Cruiser")) {
+            } if(shipName.equalsIgnoreCase("battleship")) {
                 currModel.getShip(shipName).setLocation(new Coordinate(rowint,colInt),new Coordinate(rowint,colInt+3));
-            } if(shipName.equalsIgnoreCase("destroyer")) {
+            } if(shipName.equalsIgnoreCase("cruiser")) {
                 currModel.getShip(shipName).setLocation(new Coordinate(rowint,colInt),new Coordinate(rowint,colInt+2));
+            } if(shipName.equalsIgnoreCase("destroyer")) {
+                currModel.getShip(shipName).setLocation(new Coordinate(rowint,colInt),new Coordinate(rowint,colInt+1));
             }if(shipName.equalsIgnoreCase("submarine")) {
-                currModel.getShip(shipName).setLocation(new Coordinate(rowint, colInt), new Coordinate(rowint, colInt + 2));
+                currModel.getShip(shipName).setLocation(new Coordinate(rowint, colInt), new Coordinate(rowint,colInt+2));
             }
         }else{
             //vertical
                 if (shipName.equalsIgnoreCase("aircraftcarrier")) {
-                    currModel.getShip(shipName).setLocation(new Coordinate(rowint,colInt),new Coordinate(rowint+5,colInt));
-                } if(shipName.equalsIgnoreCase("battleship")) {
                     currModel.getShip(shipName).setLocation(new Coordinate(rowint,colInt),new Coordinate(rowint+4,colInt));
-                } if(shipName.equalsIgnoreCase("Cruiser")) {
+                } if(shipName.equalsIgnoreCase("battleship")) {
                     currModel.getShip(shipName).setLocation(new Coordinate(rowint,colInt),new Coordinate(rowint+3,colInt));
-                } if(shipName.equalsIgnoreCase("destroyer")) {
+                } if(shipName.equalsIgnoreCase("cruiser")) {
                     currModel.getShip(shipName).setLocation(new Coordinate(rowint,colInt),new Coordinate(rowint+2,colInt));
+                } if(shipName.equalsIgnoreCase("destroyer")) {
+                    currModel.getShip(shipName).setLocation(new Coordinate(rowint,colInt),new Coordinate(rowint+1,colInt));
                 }if(shipName.equalsIgnoreCase("submarine")) {
-                    currModel.getShip(shipName).setLocation(new Coordinate(rowint, colInt), new Coordinate(rowint + 2, colInt));
+                    currModel.getShip(shipName).setLocation(new Coordinate(rowint, colInt), new Coordinate(rowint+2,colInt));
                 }
         }
         return currModel;
@@ -132,6 +131,23 @@ public class BattleshipModel {
             playerHits.add(coor);
         } else {
             playerMisses.add(coor);
+        }
+    }
+
+    public boolean scanPlayer(int row, int col ) {
+        Coordinate coor = new Coordinate(row,col);
+        if(computer_aircraftCarrier.covers(coor)){
+            return true;
+        }else if (computer_battleship.covers(coor)){
+            return true;
+        }else if (computer_cruiser.covers(coor)){
+            return true;
+        }else if (computer_destroyer.covers(coor)){
+            return true;
+        }else if (computer_submarine.covers(coor)){
+            return true;
+        } else {
+            return false;
         }
     }
 }
