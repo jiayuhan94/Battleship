@@ -40,21 +40,20 @@ button:hover {background-color: #bbbbbb;}
 	text-align: center;
 }
 #options {padding: 10px;}
-#place-ships {display: none;}
+#place-ships {display: block;}
 #place-ships ul {
-	width: 150px;
+	width: 185px;
 	list-style-type: none;
-	padding: 5px;
-	margin: 5px auto;
+	padding: 5px 0px;
+	margin: 0px auto;
 	background-color: #aaaaaa;
-	border-radius: 10px;
+	border-radius: 5px;
 }
 .container {
 	position: fixed;
 	top: 150px; left: 300px;
 	width: 1300px;
 	text-align: center;
-	overflow: auto;
 }
 .controller {
 	height: 450px;
@@ -104,6 +103,48 @@ button:hover {background-color: #bbbbbb;}
 .hits, .misses {padding: 0; font-size: 10pt;}
 .hits {float: left;}
 .misses {float: right;}
+
+.shipSelect {
+    background-color: #dddddd;
+    width: 165px;
+}
+AircraftcarrierDiv# {
+    padding: 0, 0;
+    margin: 0, 0;
+}
+.placement {
+    background-color: #dddddd;
+}
+li {
+    text-align: center;
+    border: 1px gray solid;
+}
+li:hover,
+li.focus {
+    background-color: #f7f7f7;
+    cursor: pointer;
+}
+label {
+    cursor: pointer;
+}
+input[type="radio"]:checked+label {
+     background-color: #dddddd;
+     border: 3px gray solid;
+     padding-left: 20px;
+     padding-right: 20px;
+}
+input[type="radio"] {
+    display: none;
+}
+#shipSelect {
+    background-color: #dddddd;
+}
+#rowSelect {
+    background-color: #dddddd;
+    text-align: right;
+}
+
+
 
 //////
 

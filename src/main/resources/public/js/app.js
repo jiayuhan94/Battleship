@@ -8,10 +8,6 @@ $( document ).ready(function() {
    });
 });
 
-function placeShips() {
-    	div = document.getElementById('place-ships');
-    	div.style.display = "block";
-	}
 function cancelShips() {
     div = document.getElementById('place-ships');
     div.style.display = "none";
