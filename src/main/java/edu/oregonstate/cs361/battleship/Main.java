@@ -102,7 +102,7 @@ public class Main {
         }else{
             currModel.results = "No";
         }
-
+        currModel.shootAtPlayer();
     //    return currModel.results;
         Gson gson = new Gson();
         return gson.toJson(currModel);

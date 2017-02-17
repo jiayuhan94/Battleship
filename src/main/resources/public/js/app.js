@@ -1,4 +1,6 @@
 var gameModel;
+var scan_results;
+var scan_counter = 0;
 
 $( document ).ready(function() {
   // Handler for .ready() called.
@@ -17,6 +19,8 @@ function cancelShips() {
     div.style.display = "none";
 }
 function scan() {
+    if (scan_counter < 3){
+    scan_counter++;
     console.log($( "#rowFire" ).val());
     console.log($( "#colFire" ).val());
 //var menuId = $( "ul.nav" ).first().attr( "id" );
@@ -32,7 +36,7 @@ function scan() {
      displayGameState(currModel);
      gameModel = currModel;
      //test purpose
-       alert("this works")
+     alert("this works")
 //     return results;
 
    });
@@ -40,7 +44,11 @@ function scan() {
    request.fail(function( jqXHR, textStatus ) {
      alert( "Request failed: " + textStatus );
    });
-
+    }
+    else{
+        document.getElementById("scan").disabled = true;
+        $( document.getElementById('scan')  ).css("background-color", "black");
+    }
 //    alert("I'm an error message. I can be styled if you're interested in a small external framework. Check out SweetAlert");
 }
 

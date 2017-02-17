@@ -109,14 +109,14 @@ button:hover {background-color: #bbbbbb;}
 
 
 .gameBoard{
-/*with:100px;
+/*width:100px;
 height:100px;*/
 background-color: light-gray;
 }
 
 .gameBoard td {
-width: 40px;
-height:40px;
+width: 30px;
+height:30px;
 background-color:blue;
 }
 
