@@ -20,33 +20,6 @@
     <!--#parse("/velocity/todoList.vm")-->
 
 
-        Row:
-        <select name="rowFire" id="rowFire">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-        </select>
-        Column:
-        <select name="colFire" id="colFire">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-        </select>
-
 
     <div class="console">
         <div id="options">
@@ -243,10 +216,10 @@
                             </tr>
                         </table>
                     </div></div>
-                <div class="shots">
+                <!--div class="shots">
                     <div class="hits">Hits: <span id="plyr-hits">3</span></div>
                     <div class="misses">Misses: <span id="plyr-misses">5</span></div>
-                </div>
+                </div-->
             </div>
             <div class="controller">
                 <div class="messages">
@@ -262,13 +235,14 @@
                             <input type="number" name="colScan" id="colScan" min="1" max="10" style="width: 40px;">
                     </div>
                     <button id="scan" type="button" onclick="scan()">Scan</button>
-                    <button id="fire" type="button" onclick="fire()">Fire</button>
+
                     <div id="fireBoard">
                         Row:
                         <input name="rowFire" id="rowFire" min="1" max=10" style="width: 40px;">
                         Column:
                         <input name="colFire" id="colFire" min="1" max="10" style="width: 40px;">
                     </div>
+                    <button id="fire" type="button" onclick="fire()">Fire</button>
 
 
                 </div>
@@ -400,10 +374,10 @@
                             </tr>
                         </table>
                     </div></div>
-                <div class="shots">
+                <!--div class="shots">
                     <div class="hits">Hits: <span id="cpu-hits">2</span></div>
                     <div class="misses">Misses: <span id="cpu-misses">5</span></div>
-                </div>
+                </-div-->
             </div>
         </div>
     </div>
