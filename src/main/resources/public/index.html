@@ -224,8 +224,12 @@
                 </div>
                 <div class="controls">
                     <h1>Controls</h1>
-                    <input type="number" name="Row" id="rowScan" min="1" max="10">
-                    <input type="number" name="Column" id="colScan" min="1" max="10">
+                    <div id="Scanboard">
+                            Row:
+                            <input type="number" name="rowScan" id="rowScan" min="1" max="10" style="width: 40px;">
+                            Column:
+                            <input type="number" name="colScan" id="colScan" min="1" max="10" style="width: 40px;">
+                    </div>
                     <button id="scan" type="button" onclick="scan()">Scan</button>
                     <button id="fire" type="button" onclick="fire()">Fire</button>
                     <div id="AircraftcarrierDiv">
