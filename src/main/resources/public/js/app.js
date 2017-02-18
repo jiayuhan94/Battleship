@@ -16,7 +16,6 @@ function cancelShips() {
 }
 function scan() {
     if (scan_counter < 3){
-    scan_counter++;
     console.log($( "#rowFire" ).val());
     console.log($( "#colFire" ).val());
 //var menuId = $( "ul.nav" ).first().attr( "id" );
@@ -31,14 +30,14 @@ function scan() {
    request.done(function( currModel ) {
      displayGameState(currModel);
      gameModel = currModel;
+     scan_counter++;
      //test purpose
-     alert("this works")
-//     return results;
+     //alert("this works")
 
    });
 
    request.fail(function( jqXHR, textStatus ) {
-     alert( "Request failed: " + textStatus );
+     alert( "Request failed: Scan out of bound" /*+ textStatus */ );
    });
     }
     else{
@@ -70,7 +69,7 @@ function placeShip() {
    });
 
    request.fail(function( jqXHR, textStatus ) {
-     alert( "Request failed: " + textStatus );
+     alert( "Request failed: " + textStatus  );
    });
 }
 
@@ -94,7 +93,7 @@ function fire(){
    });
 
    request.fail(function( jqXHR, textStatus ) {
-     alert( "Request failed: " + textStatus );
+     alert( "Request failed: Fire out of bound" /*+ textStatus */ );
    });
 
 }
