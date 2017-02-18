@@ -63,7 +63,7 @@ button:hover {background-color: #bbbbbb;}
 }
 .messages {
 	margin: 0 auto 10px auto;
-	height: 125px;
+	height: 175px;
 	text-align: left;
 	background-color: #bbbbbb;
 	border: 2px solid #444444;
@@ -71,11 +71,12 @@ button:hover {background-color: #bbbbbb;}
 }
 .alert {float: left;}
 .controls {
-	height: 300px;
+	height: 250px;
 	background-color: #888888;
 	border: 2px solid #444444;
 	border-radius: 10px;
 }
+
 .board {
 	height: 450px;
 	width: 450px;
@@ -163,7 +164,15 @@ background-color:blue;
 }
 
 table, th, td {
-   border: 1px solid black;
+   border: 2px solid white;
+   text-align: center;
+    border-collapse: collapse;
+}
+
+table.gamestatetable th, table.gamestatetable td {
+    boarder: 1px solid black;
+    text-align: center;
+    border-collapse: collapse;
 }
 
 #MyBoard .ship{
