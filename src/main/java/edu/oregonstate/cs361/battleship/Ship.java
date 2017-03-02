@@ -8,6 +8,7 @@ public class Ship {
     protected int length;
     protected Coordinate start;
     protected Coordinate end;
+    protected boolean Stealth;
 
     public Ship(){
         name = "null";
@@ -21,6 +22,7 @@ public class Ship {
         length = l;
         start = s;
         end = e;
+        Stealth = false;
     }
     public Ship(String n, int l) {
         name = n;
@@ -30,7 +32,6 @@ public class Ship {
     public void setLocation(Coordinate s, Coordinate e) {
         start = s;
         end = e;
-
     }
 
     public boolean covers(Coordinate test) {
@@ -56,6 +57,9 @@ public class Ship {
 
         }
         return false;
+    }
+    public boolean getStealth() {
+        return Stealth;
     }
 
 }
