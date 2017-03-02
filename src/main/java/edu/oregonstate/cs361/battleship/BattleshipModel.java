@@ -20,12 +20,14 @@ public class BattleshipModel {
     private Ship computer_destroyer = new Ship("Computer_Destroyer",2, new Coordinate(7,3),new Coordinate(7,5));
     private Ship computer_submarine = new Ship("Computer_Submarine",2, new Coordinate(9,6),new Coordinate(9,8));
 
-    private ArrayList<Coordinate> playerHits;
-    private ArrayList<Coordinate> playerMisses;
-    private ArrayList<Coordinate> computerHits;
-    private ArrayList<Coordinate> computerMisses;
+    public ArrayList<Coordinate> playerHits;
+    public ArrayList<Coordinate> playerMisses;
+    public ArrayList<Coordinate> computerHits;
+    public ArrayList<Coordinate> computerMisses;
 
     public String results;
+    public int playerHitpoints;
+    public int computerHitpoints;
 
 
     public BattleshipModel() {

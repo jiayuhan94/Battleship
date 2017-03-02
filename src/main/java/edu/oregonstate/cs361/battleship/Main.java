@@ -79,9 +79,13 @@ public class Main {
 
         if(rowInt > 10 || rowInt < 1 || colInt > 10 || colInt < 1){
             // return a string to make the request fail to show error message
-            return currModel.results;
+            currModel.results = "out of bound";
+            Gson gson = new Gson();
+            return gson.toJson(currModel);
         }else if(hit || miss){
-            return currModel.results;
+            currModel.results = "already fired";
+            Gson gson = new Gson();
+            return gson.toJson(currModel);
         }else{
             currModel.shootAtComputer(rowInt,colInt);
             currModel.shootAtPlayer();
