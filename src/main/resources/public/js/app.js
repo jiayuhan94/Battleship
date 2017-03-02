@@ -95,10 +95,18 @@ function fire(){
    request.done(function( currModel ) {
 
         if (currModel.error_message != null){
-        alert(currModel.error_message)
+            alert(currModel.error_message)
+        }else if(currModel.playerHitpoints == 14){
+            displayGameState(currModel);
+            gameModel = currModel;
+            alert(currModel.AI_win);
+        }else if(currModel.computerHitpoints == 14){
+            displayGameState(currModel);
+            gameModel = currModel;
+            alert(currModel.Player_win)
         }else{
-        displayGameState(currModel);
-                gameModel = currModel;}
+            displayGameState(currModel);
+            gameModel = currModel;}
    });
 
    request.fail(function( jqXHR, textStatus ) {
