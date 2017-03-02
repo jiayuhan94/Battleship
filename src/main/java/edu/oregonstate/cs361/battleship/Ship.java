@@ -4,16 +4,25 @@ package edu.oregonstate.cs361.battleship;
  * Created by michaelhilton on 1/5/17.
  */
 public class Ship {
-    private String name;
-    private int length;
-    private Coordinate start;
-    private Coordinate end;
+    protected String name;
+    protected int length;
+    protected Coordinate start;
+    protected Coordinate end;
+    protected boolean Stealth;
+
+    public Ship(){
+        name = "null";
+        length = -1;
+        start = start;
+        end = end;
+    }
 
     public Ship(String n, int l,Coordinate s, Coordinate e) {
         name = n;
         length = l;
         start = s;
         end = e;
+        Stealth = false;
     }
     public Ship(String n, int l) {
         name = n;
@@ -23,7 +32,6 @@ public class Ship {
     public void setLocation(Coordinate s, Coordinate e) {
         start = s;
         end = e;
-
     }
 
     public boolean covers(Coordinate test) {
@@ -49,6 +57,9 @@ public class Ship {
 
         }
         return false;
+    }
+    public boolean getStealth() {
+        return Stealth;
     }
 
 }
