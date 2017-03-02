@@ -28,9 +28,12 @@ function scan() {
    });
 
    request.done(function( currModel ) {
-     displayGameState(currModel);
-     gameModel = currModel;
-     scan_counter++;
+        if (currModel.error_message != null){
+               alert(currModel.error_message)
+        }else{
+            displayGameState(currModel);
+            gameModel = currModel;
+            scan_counter++;}
      //test purpose
      //alert("this works")
 
@@ -87,9 +90,12 @@ function fire(){
    });
 
    request.done(function( currModel ) {
-     displayGameState(currModel);
-     gameModel = currModel;
 
+        if (currModel.error_message != null){
+        alert(currModel.error_message)
+        }else{
+        displayGameState(currModel);
+                gameModel = currModel;}
    });
 
    request.fail(function( jqXHR, textStatus ) {

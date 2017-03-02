@@ -26,6 +26,7 @@ public class BattleshipModel {
     public ArrayList<Coordinate> computerMisses;
 
     public String results;
+    public String error_message;
     public int playerHitpoints;
     public int computerHitpoints;
 
@@ -135,6 +136,36 @@ public class BattleshipModel {
         } else {
             playerMisses.add(coor);
         }
+    }
+
+    public boolean checkfirepoint(int row, int col){
+        int hitsize = computerHits.size();
+        int missize = computerMisses.size();
+
+        int i = 0;
+        while( i < hitsize) {
+            Coordinate z = computerHits.get(i);
+            int xhit = z.Across;
+            int yhit = z.Down;
+            if (row == xhit && col == yhit){
+                return true;
+            }else{
+                i += 1;
+            }
+        }
+
+        int j = 0;
+        while( j < missize){
+            Coordinate m = computerMisses.get(j);
+            int xmiss = m.Across;
+            int ymiss = m.Down;
+            if(row == xmiss && col == ymiss){
+                return true;
+            }else{
+                j += 1;
+            }
+        }
+        return false;
     }
 
     public boolean scanPlayer(int row, int col ) {
