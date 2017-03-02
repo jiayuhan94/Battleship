@@ -24,12 +24,14 @@ public class BattleshipModel {
     private Civilian computer_clipper = new Civilian("Computer_Clipper", 3, new Coordinate(5, 1), new Coordinate(5, 3));
     private Civilian computer_dinghy = new Civilian("Computer_Dinghy", 1, new Coordinate(1,1), new Coordinate(1, 1));
 
-    private ArrayList<Coordinate> playerHits;
-    private ArrayList<Coordinate> playerMisses;
-    private ArrayList<Coordinate> computerHits;
-    private ArrayList<Coordinate> computerMisses;
+    public ArrayList<Coordinate> playerHits;
+    public ArrayList<Coordinate> playerMisses;
+    public ArrayList<Coordinate> computerHits;
+    public ArrayList<Coordinate> computerMisses;
 
     public String results;
+    public int playerHitpoints;
+    public int computerHitpoints;
 
 
     public BattleshipModel() {

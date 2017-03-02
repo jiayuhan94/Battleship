@@ -93,7 +93,7 @@ function fire(){
    });
 
    request.fail(function( jqXHR, textStatus ) {
-     alert( "Request failed: Fire out of bound" /*+ textStatus */ );
+     alert( "Request failed: Invalid fire point." /*+ textStatus */ );
    });
 
 }
