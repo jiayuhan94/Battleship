@@ -13,6 +13,8 @@ $( document ).ready(function() {
 function cancelShips() {
     div = document.getElementById('place-ships');
     div.style.display = "none";
+    document.getElementById("scan").disabled = false;
+    document.getElementById("fire").disabled = false;
 }
 function scan() {
     if (scan_counter < 3){
@@ -27,10 +29,14 @@ function scan() {
         dataType: "json"
    });
 
+
    request.done(function( currModel ) {
-     displayGameState(currModel);
-     gameModel = currModel;
-     scan_counter++;
+        if (currModel.error_message != null){
+               alert(currModel.error_message)
+        }else{
+            displayGameState(currModel);
+            gameModel = currModel;
+            scan_counter++;}
      //test purpose
      //alert("this works")
 
@@ -42,7 +48,7 @@ function scan() {
     }
     else{
         document.getElementById("scan").disabled = true;
-        $( document.getElementById('scan')  ).css("background-color", "black");
+        $( document.getElementById('scan')  ).css("background-color", "gray");
     }
 //    alert("I'm an error message. I can be styled if you're interested in a small external framework. Check out SweetAlert");
 }
@@ -87,9 +93,20 @@ function fire(){
    });
 
    request.done(function( currModel ) {
-     displayGameState(currModel);
-     gameModel = currModel;
 
+        if (currModel.error_message != null){
+            alert(currModel.error_message)
+        }else if(currModel.playerHitpoints == 14){
+            displayGameState(currModel);
+            gameModel = currModel;
+            alert(currModel.AI_win);
+        }else if(currModel.computerHitpoints == 14){
+            displayGameState(currModel);
+            gameModel = currModel;
+            alert(currModel.Player_win)
+        }else{
+            displayGameState(currModel);
+            gameModel = currModel;}
    });
 
    request.fail(function( jqXHR, textStatus ) {
@@ -108,9 +125,10 @@ $( '#TheirBoard td'  ).css("background-color", "blue");
 
 displayShip(gameModel.aircraftCarrier);
 displayShip(gameModel.battleship);
-displayShip(gameModel.cruiser);
-displayShip(gameModel.destroyer);
+displayShip(gameModel.dinghy);
+displayShip(gameModel.clipper);
 displayShip(gameModel.submarine);
+
 
 for (var i = 0; i < gameModel.computerMisses.length; i++) {
    $( '#TheirBoard #' + gameModel.computerMisses[i].Across + '_' + gameModel.computerMisses[i].Down ).css("background-color", "green");
@@ -149,7 +167,5 @@ function displayShip(ship){
         }
     }
  }
-
-
-
 }
+
