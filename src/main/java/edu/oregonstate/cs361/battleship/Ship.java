@@ -24,10 +24,6 @@ public class Ship {
         end = e;
         Stealth = false;
     }
-    public Ship(String n, int l) {
-        name = n;
-        length = l;
-    }
 
     public void setLocation(Coordinate s, Coordinate e) {
         start = s;

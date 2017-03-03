@@ -1,5 +1,4 @@
 var gameModel;
-var scan_results;
 var scan_counter = 0;
 
 $( document ).ready(function() {
@@ -36,9 +35,13 @@ function scan() {
         }else{
             displayGameState(currModel);
             gameModel = currModel;
-            scan_counter++;}
-     //test purpose
-     //alert("this works")
+            scan_counter++;
+            if (currModel.scan_results){
+                alert("Yes, there is a ship.")
+            }else{
+                alert("Man, you waste this.")
+            }
+        }
 
    });
 
@@ -50,7 +53,6 @@ function scan() {
         document.getElementById("scan").disabled = true;
         $( document.getElementById('scan')  ).css("background-color", "gray");
     }
-//    alert("I'm an error message. I can be styled if you're interested in a small external framework. Check out SweetAlert");
 }
 
 function placeShip() {
