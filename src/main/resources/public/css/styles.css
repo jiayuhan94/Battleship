@@ -144,6 +144,27 @@ input[type="radio"] {
     background-color: #dddddd;
     text-align: right;
 }
+#scan:disabled{background-color: gray;}
+#scan:hover{background-color: #bbbbbb;}
+#scan{background-color:#aaaaaa;}
+#scan[disabled]:hover {background-color: gray}
+#fire:disabled{background-color: gray;}
+#fire:hover{background-color: #bbbbbb;}
+#fire{background-color:#aaaaaa;}
+#fire[disabled]:hover {background-color: gray}
+/*#fire{
+    display: none;
+}
+#scan{
+    display: none;
+}
+#fireBoard{
+    display: none;
+}
+#Scanboard{
+    display: none;
+}*/
+
 
 
 

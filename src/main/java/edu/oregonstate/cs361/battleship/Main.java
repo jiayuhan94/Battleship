@@ -73,10 +73,19 @@ public class Main {
         String col = req.params("col");
         int rowInt = Integer.parseInt(row);
         int colInt = Integer.parseInt(col);
+        Coordinate coor = new Coordinate(rowInt,colInt);
+        boolean hit = currModel.computerHits.contains(coor);
+        boolean miss = currModel.computerMisses.contains(coor);
 
         if(rowInt > 10 || rowInt < 1 || colInt > 10 || colInt < 1){
             // return a string to make the request fail to show error message
-            return currModel.results;
+            currModel.results = "out of bound";
+            Gson gson = new Gson();
+            return gson.toJson(currModel);
+        }else if(hit || miss){
+            currModel.results = "already fired";
+            Gson gson = new Gson();
+            return gson.toJson(currModel);
         }else{
             currModel.shootAtComputer(rowInt,colInt);
             currModel.shootAtPlayer();
