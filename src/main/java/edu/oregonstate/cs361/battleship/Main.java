@@ -34,7 +34,7 @@ public class Main {
     }
 
     //This function returns a new model
-    private static String newModel() {
+    public static String newModel() {
         BattleshipModel bm = new BattleshipModel();
         Gson gson = new Gson();
         return gson.toJson(bm);
@@ -88,8 +88,8 @@ public class Main {
             currModel.shootAtComputer(rowInt,colInt);
             currModel.shootAtPlayer();
             Gson gson = new Gson();
-            return gson.toJson(currModel);}
-
+            return gson.toJson(currModel);
+        }
     }
 
     private static String Scan(Request req) {
@@ -126,5 +126,4 @@ public class Main {
         Gson gson = new Gson();
         return gson.toJson(currModel);
     }
-
 }
