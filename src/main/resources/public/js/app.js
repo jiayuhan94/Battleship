@@ -36,7 +36,7 @@ function scan() {
             displayGameState(currModel);
             gameModel = currModel;
             scan_counter++;
-            if (currModel.scan_results){
+            if (currModel.scan_result){
                 alert("Yes, there is a ship.")
             }else{
                 alert("Man, you waste this.")
@@ -117,6 +117,7 @@ function fire(){
 
 }
 
+
 function log(logContents){
     console.log(logContents);
 }
@@ -130,6 +131,11 @@ displayShip(gameModel.battleship);
 displayShip(gameModel.dinghy);
 displayShip(gameModel.clipper);
 displayShip(gameModel.submarine);
+
+document.getElementById("playerhits").innerHTML = gameModel.computerHits.length;
+document.getElementById("AIhits").innerHTML = gameModel.playerHits.length;
+document.getElementById("playermisses").innerHTML = gameModel.computerMisses.length;
+document.getElementById("AImisses").innerHTML = gameModel.playerMisses.length;
 
 
 for (var i = 0; i < gameModel.computerMisses.length; i++) {
