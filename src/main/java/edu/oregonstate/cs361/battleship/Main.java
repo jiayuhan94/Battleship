@@ -73,10 +73,17 @@ public class Main {
         String col = req.params("col");
         int rowInt = Integer.parseInt(row);
         int colInt = Integer.parseInt(col);
+        currModel.error_message = null;
 
         if(rowInt > 10 || rowInt < 1 || colInt > 10 || colInt < 1){
             // return a string to make the request fail to show error message
-            return currModel.results;
+            currModel.error_message = "Out of bound";
+            Gson gson = new Gson();
+            return gson.toJson(currModel);
+        }else if(currModel.checkfirepoint(rowInt, colInt)){
+            currModel.error_message = "Already fired";
+            Gson gson = new Gson();
+            return gson.toJson(currModel);
         }else{
             currModel.shootAtComputer(rowInt,colInt);
             currModel.shootAtPlayer();
@@ -93,10 +100,13 @@ public class Main {
         String col = req.params("col");
         int rowInt = Integer.parseInt(row);
         int colInt = Integer.parseInt(col);
+        currModel.error_message = null;
 
         if(rowInt > 10 || rowInt < 1 || colInt > 10 || colInt < 1){
             // return a string to make the request fail to show error message
-            return currModel.results;
+            currModel.error_message = "Out of bound scan";
+            Gson gson = new Gson();
+            return gson.toJson(currModel);
         }
         else if (currModel.scanPlayer(rowInt,colInt)){
             currModel.results = "Yes";
