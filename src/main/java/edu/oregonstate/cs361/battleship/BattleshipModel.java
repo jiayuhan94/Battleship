@@ -29,7 +29,7 @@ public class BattleshipModel {
     public ArrayList<Coordinate> computerHits;
     public ArrayList<Coordinate> computerMisses;
 
-    public String results;
+    public boolean scan_result;
     public String error_message;
     //playerHitpoints to count how many hits player has taken, when it equals to 14, computer wins
     //computerHitpoints to count how many hits AI has taken, when it equals to 14, player wins
@@ -161,6 +161,7 @@ public class BattleshipModel {
         int missize = computerMisses.size();
 
         int i = 0;
+        int j = 0;
         while( i < hitsize) {
             Coordinate z = computerHits.get(i);
             int xhit = z.Across;
@@ -171,8 +172,6 @@ public class BattleshipModel {
                 i += 1;
             }
         }
-
-        int j = 0;
         while( j < missize){
             Coordinate m = computerMisses.get(j);
             int xmiss = m.Across;
@@ -190,14 +189,14 @@ public class BattleshipModel {
         Coordinate coor = new Coordinate(row,col);
         if((computer_aircraftCarrier.covers(coor)) && (computer_aircraftCarrier.getStealth()==false)){
             return true;
-        }else if ((computer_battleship.covers(coor))&& (computer_battleship.getStealth()==false)){
-            return true;
+        }else if ((computer_battleship.covers(coor))&& (computer_battleship.getStealth()==true)){
+            return false;
         }else if ((computer_clipper.covers(coor)) && (computer_clipper.getStealth()==false)){
             return true;
         }else if (computer_dinghy.covers(coor) && (computer_dinghy.getStealth()==false)){
             return true;
-        }else if (computer_submarine.covers(coor)  && (computer_submarine.getStealth()==false)){
-            return true;
+        }else if (computer_submarine.covers(coor)  && (computer_submarine.getStealth()==true)){
+            return false;
         } else {
             return false;
         }
