@@ -33,8 +33,8 @@ public class BattleshipModel {
     public String error_message;
     //playerHitpoints to count how many hits player has taken, when it equals to 14, computer wins
     //computerHitpoints to count how many hits AI has taken, when it equals to 14, player wins
-    public int playerHitpoints = 0;
-    public int computerHitpoints = 0;
+    public int playershipsank = 0;
+    public int computershipsank = 0;
     public String AI_win = "You lose...T_T";
     public String Player_win = "You WIN!!! ^_^";
 
@@ -103,19 +103,24 @@ public class BattleshipModel {
         Coordinate coor = new Coordinate(row,col);
         if(computer_aircraftCarrier.covers(coor)){
             computerHits.add(coor);
-            computerHitpoints += 1;
+            computer_aircraftCarrier.health -= 1;
+            checkcomputerhealth(computer_aircraftCarrier.health);
         }else if (computer_battleship.covers(coor)){
             computerHits.add(coor);
-            computerHitpoints += 1;
+            computer_battleship.health -= 1;
+            checkcomputerhealth(computer_battleship.health);
         }else if (computer_clipper.covers(coor)){
             computerHits.add(coor);
-            computerHitpoints += 1;
+            computer_clipper.health -= 1;
+            checkcomputerhealth(computer_clipper.health);
         }else if (computer_dinghy.covers(coor)){
             computerHits.add(coor);
-            computerHitpoints += 1;
+            computer_dinghy.health -= 1;
+            checkcomputerhealth(computer_dinghy.health);
         }else if (computer_submarine.covers(coor)){
             computerHits.add(coor);
-            computerHitpoints += 1;
+            computer_submarine.health -= 1;
+            checkcomputerhealth(computer_submarine.health);
         } else {
             computerMisses.add(coor);
         }
@@ -138,23 +143,41 @@ public class BattleshipModel {
 
         if(aircraftCarrier.covers(coor)){
             playerHits.add(coor);
-            playerHitpoints += 1;
+            aircraftCarrier.health -= 1;
+            checkplayerhealth(aircraftCarrier.health);
         }else if (battleship.covers(coor)){
             playerHits.add(coor);
-            playerHitpoints += 1;
+            battleship.health -= 1;
+            checkplayerhealth(battleship.health);
         }else if (clipper.covers(coor)){
             playerHits.add(coor);
-            playerHitpoints += 1;
+            clipper.health -= 1;
+            checkplayerhealth(clipper.health);
         }else if (dinghy.covers(coor)){
             playerHits.add(coor);
-            playerHitpoints += 1;
+            dinghy.health -= 1;
+            checkplayerhealth(dinghy.health);
         }else if (submarine.covers(coor)){
             playerHits.add(coor);
-            playerHitpoints += 1;
+            submarine.health -= 1;
+            checkplayerhealth(submarine.health);
         } else {
             playerMisses.add(coor);
         }
     }
+
+    public void checkplayerhealth(int health){
+        if(health == 0){
+            playershipsank += 1;
+        }else{}
+    }
+
+    public void checkcomputerhealth(int health){
+        if(health == 0){
+            computershipsank += 1;
+        }else{}
+    }
+
 
     public boolean checkfirepoint(int row, int col){
         int hitsize = computerHits.size();
