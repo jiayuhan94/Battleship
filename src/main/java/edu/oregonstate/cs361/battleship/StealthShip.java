@@ -10,5 +10,6 @@ public class StealthShip extends Ship{
         start = s;
         end = e;
         Stealth = true;
+        health = l;
     }
 }

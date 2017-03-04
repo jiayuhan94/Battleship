@@ -98,17 +98,18 @@ function fire(){
 
         if (currModel.error_message != null){
             alert(currModel.error_message)
-        }else if(currModel.playerHitpoints == 14){
+        }else if(currModel.playershipsank == 5){
             displayGameState(currModel);
             gameModel = currModel;
             alert(currModel.AI_win);
-        }else if(currModel.computerHitpoints == 14){
+        }else if(currModel.computershipsank == 5){
             displayGameState(currModel);
             gameModel = currModel;
-            alert(currModel.Player_win)
+            alert(currModel.Player_win);
         }else{
             displayGameState(currModel);
-            gameModel = currModel;}
+            gameModel = currModel;
+            }
    });
 
    request.fail(function( jqXHR, textStatus ) {

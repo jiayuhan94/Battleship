@@ -11,5 +11,6 @@ public class Civilian extends Ship {
         start = s;
         end = e;
         Stealth = false;
+        health = 1;
     }
 }

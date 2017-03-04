@@ -9,6 +9,7 @@ public class Ship {
     protected Coordinate start;
     protected Coordinate end;
     protected boolean Stealth;
+    protected int health;
 
     public Ship(){
         name = "null";
@@ -23,6 +24,7 @@ public class Ship {
         start = s;
         end = e;
         Stealth = false;
+        health = l;
     }
 
     public void setLocation(Coordinate s, Coordinate e) {
@@ -35,8 +37,8 @@ public class Ship {
         if(start.getAcross() == end.getAcross()){
             if(test.getAcross() == start.getAcross()){
                 if((test.getDown() >= start.getDown()) &&
-                (test.getDown() <= end.getDown()))
-                return true;
+                        (test.getDown() <= end.getDown()))
+                    return true;
             } else {
                 return false;
             }
