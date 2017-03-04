@@ -216,9 +216,9 @@ public class BattleshipModel {
             return false;
         }else if ((computer_clipper.covers(coor)) && (computer_clipper.getStealth()==false)){
             return true;
-        }else if (computer_dinghy.covers(coor) && (computer_dinghy.getStealth()==false)){
+        }else if ((computer_dinghy.covers(coor)) && (computer_dinghy.getStealth()==false)){
             return true;
-        }else if (computer_submarine.covers(coor)  && (computer_submarine.getStealth()==true)){
+        }else if ((computer_submarine.covers(coor))  && (computer_submarine.getStealth()==true)){
             return false;
         } else {
             return false;

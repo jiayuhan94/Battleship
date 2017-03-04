@@ -37,19 +37,20 @@ function scan() {
             gameModel = currModel;
             scan_counter++;
             if (currModel.scan_result){
-                alert("Yes, there is a ship.")
+                alert("Ship Detected.\nThere is at least one ship here or in an adjacent tile.")
             }else{
-                alert("Man, you waste this.")
+                alert("Man, you wasted this!\nThere aren't any ships here or in any adjacent tiles.")
             }
         }
 
    });
 
    request.fail(function( jqXHR, textStatus ) {
-     alert( "Request failed: Scan out of bound" /*+ textStatus */ );
+     alert( "Request failed: scan is out of bounds.\nRow and Column MUST be integers between 1 and 10." /*+ textStatus */ );
    });
     }
     else{
+        alert("Request failed: You have already used all of your scans!\nAre you trying to cheat?\nI guess I will have to disable the button to prevent you from trying that again.")
         document.getElementById("scan").disabled = true;
         $( document.getElementById('scan')  ).css("background-color", "gray");
     }
@@ -113,7 +114,7 @@ function fire(){
    });
 
    request.fail(function( jqXHR, textStatus ) {
-     alert( "Request failed: Invalid fire point." /*+ textStatus */ );
+     alert( "Request failed: Invalid fire point.\nRow and Column MUST be integers between 1 and 10." /*+ textStatus */ );
    });
 
 }
