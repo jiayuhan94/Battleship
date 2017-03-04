@@ -77,11 +77,11 @@ public class Main {
 
         if(rowInt > 10 || rowInt < 1 || colInt > 10 || colInt < 1){
             // return a string to make the request fail to show error message
-            currModel.error_message = "Out of bound";
+            currModel.error_message = "Fire is out of bounds!\nRow and Column MUST be integers between 1 and 10.";
             Gson gson = new Gson();
             return gson.toJson(currModel);
         }else if(currModel.checkfirepoint(rowInt, colInt)){
-            currModel.error_message = "Already fired";
+            currModel.error_message = "You already fired in this location!\nAre you even looking at the board?";
             Gson gson = new Gson();
             return gson.toJson(currModel);
         }else{
@@ -104,7 +104,7 @@ public class Main {
 
         if(rowInt > 10 || rowInt < 1 || colInt > 10 || colInt < 1){
             // return a string to make the request fail to show error message
-            currModel.error_message = "Out of bound scan";
+            currModel.error_message = "Scan is out of bounds!\nRow and Column MUST be integers between 1 and 10.";
             Gson gson = new Gson();
             return gson.toJson(currModel);
         }

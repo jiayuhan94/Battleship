@@ -27,7 +27,10 @@ button {
 	border-radius: 10px;
 	outline: none;
 }
-button:hover {background-color: #bbbbbb;}
+button:hover {
+background-color: #bbbbbb;
+cursor: pointer;
+}
 #cancel {width: 150px; margin: 10px auto;}
 .console {
 	position: fixed;
@@ -116,14 +119,13 @@ AircraftcarrierDiv# {
 .placement {
     background-color: #dddddd;
 }
-li {
+#orient{
     text-align: center;
     border: 1px gray solid;
 }
-li:hover,
-li.focus {
+#orient:hover,
+#orient.focus {
     background-color: #f7f7f7;
-    cursor: pointer;
 }
 label {
     cursor: pointer;
@@ -144,6 +146,14 @@ input[type="radio"] {
     background-color: #dddddd;
     text-align: right;
 }
+#instruction{
+text-align: left;
+}
+li, ul
+{
+padding: 0px 0px;
+margin: 0px 0px;
+}
 #scan:disabled{background-color: gray;}
 #scan:hover{background-color: #bbbbbb;}
 #scan{background-color:#aaaaaa;}
@@ -152,23 +162,6 @@ input[type="radio"] {
 #fire:hover{background-color: #bbbbbb;}
 #fire{background-color:#aaaaaa;}
 #fire[disabled]:hover {background-color: gray}
-/*#fire{
-    display: none;
-}
-#scan{
-    display: none;
-}
-#fireBoard{
-    display: none;
-}
-#Scanboard{
-    display: none;
-}*/
-
-
-
-
-//////
 
 
 .gameBoard{

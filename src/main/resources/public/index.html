@@ -68,8 +68,13 @@
                         </select>
                         </div>
                         <h2>Ship Orientation</h2>
+                        <div id="orient">
+
                         <li><input type="radio" name="orientationSelec" id="horizontal" value="horizontal" checked="checked" /><label for="horizontal">Horizontal</label></li>
+                        </div>
+                        <div id="orient">
                         <li><input type="radio" name="orientationSelec" id="vertical" value="vertical" /><label for="vertical">Vertical</label></li>
+                        </div>
                     </div>
                 </ul>
                 <button id="place" type="button" onclick="javascript:placeShip();">Place</button>
@@ -78,16 +83,17 @@
             <div class="instruction">
                 <h1>Instructions</h1>
                 <span id="instruction" class="alert">
-                    <ol>
-                        <li> Choose a ship, then select it's starting coordinates and orientation.</li>
-                        <li> Click "Submit" once you placed all 5 of your ships.</li>
-                        <li> Type in coordinates that you want to scan or fire on(1-10).</li>
-                        <li> Scan can only be used 3 times per game. It will turn black after all scans have been used.</li>
-                        <li> Using scan will take up a turn.</li>
-                        <li> Yellow = your ship, Red = hit, Green = miss.</li>
-                        <li> Win = sunk all enemy`s ships, Lost = all of your ships got hit.</li>
-                        <li> Press "New game" to reset the board and start a new game.</li>
-                    </ol>
+                    <ul>
+                        <li>Choose a ship, it's starting coordinates, and it's orientation</li>
+                        <li>Click "Submit" once you placed all five of your ships</li>
+                        <li>Enter the coordinates that you want to scan or fire on (1-10) (This will take up a turn and allow AI to fire at your ships)</li>
+                        <li>Scan will check if there is a ship in or adjacent to the specified coordinates and can only be used 3 times per game</li>
+                        <li>Dinghy and Clipper are considered civilian ships and will sink in one hit</li>
+                        <li>Battleship and Submarine have a stealth capability, allowing them to evade scans</li>
+                        <li>Yellow tiles represent your ships, red tiles indicate hits, and green tiles indicate misses</li>
+                        <li>You win the game if you manage to sink all of the enemy`s ships before they can sink yours</li>
+                        <li>Press the "New game" button to reset the board and start a new game</li>
+                    </ul>
                 </span>
             </div>
         </div>
