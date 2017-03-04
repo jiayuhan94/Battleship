@@ -219,10 +219,7 @@
                             </tr>
                         </table>
                     </div></div>
-                <!--div class="shots">
-                    <div class="hits">Hits: <span id="plyr-hits">3</span></div>
-                    <div class="misses">Misses: <span id="plyr-misses">5</span></div>
-                </div-->
+
             </div>
             <div class="controller">
                 <div class="messages">
@@ -235,13 +232,13 @@
                         </tr>
                         <tr>
                             <th>Hits</th>
-                            <th>3</th>
-                            <th>5</th>
+                            <th><p id="playerhits"></p></th>
+                            <th><p id="AIhits"></p></th>
                         </tr>
                         <tr>
                             <th>Misses</th>
-                            <th>2</th>
-                            <th>5</th>
+                            <th><p id="playermisses"></p></th>
+                            <th><p id="AImisses"></p></th>
                         </tr>
                     </table>
                 </div>
@@ -262,8 +259,6 @@
                         <input name="colFire" id="colFire" min="1" max="10" style="width: 40px;">
                     </div>
                     <button id="fire" type="button" disabled onclick="fire()">Fire</button>
-
-
                 </div>
             </div>
             <div class="board cpu">
@@ -392,11 +387,8 @@
                                 <td id="10_10" class="{{7_10}}"></td>
                             </tr>
                         </table>
-                    </div></div>
-                <!--div class="shots">
-                    <div class="hits">Hits: <span id="cpu-hits">2</span></div>
-                    <div class="misses">Misses: <span id="cpu-misses">5</span></div>
-                </-div-->
+                    </div>
+                </div>
             </div>
         </div>
     </div>
