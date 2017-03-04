@@ -109,17 +109,17 @@ public class Main {
             return gson.toJson(currModel);
         }
         else if (currModel.scanPlayer(rowInt,colInt)){
-            currModel.results = "Yes";
+            currModel.scan_result = true;
         }else if(colInt > 1 && currModel.scanPlayer(rowInt,colInt-1)){
-            currModel.results = "Yes";
+            currModel.scan_result = true;
         }else if(rowInt > 1 && currModel.scanPlayer(rowInt-1,colInt)){
-            currModel.results = "Yes";
+            currModel.scan_result = true;
         }else if(colInt < 10 && currModel.scanPlayer(rowInt,colInt+1)){
-            currModel.results = "Yes";
+            currModel.scan_result = true;
         }else if(rowInt < 10 && currModel.scanPlayer(rowInt+1,colInt)){
-            currModel.results = "Yes";
+            currModel.scan_result = true;
         }else{
-            currModel.results = "No";
+            currModel.scan_result = false;
         }
         currModel.shootAtPlayer();
     //    return currModel.results;

@@ -9,6 +9,7 @@ public class Ship {
     protected Coordinate start;
     protected Coordinate end;
     protected boolean Stealth;
+    protected int health;
 
     public Ship(){
         name = "null";
@@ -23,10 +24,7 @@ public class Ship {
         start = s;
         end = e;
         Stealth = false;
-    }
-    public Ship(String n, int l) {
-        name = n;
-        length = l;
+        health = l;
     }
 
     public void setLocation(Coordinate s, Coordinate e) {
