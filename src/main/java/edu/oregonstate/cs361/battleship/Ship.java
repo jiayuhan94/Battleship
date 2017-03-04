@@ -26,10 +26,6 @@ public class Ship {
         Stealth = false;
         health = l;
     }
-    public Ship(String n, int l) {
-        name = n;
-        length = l;
-    }
 
     public void setLocation(Coordinate s, Coordinate e) {
         start = s;

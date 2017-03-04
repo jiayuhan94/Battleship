@@ -187,7 +187,7 @@ background-color:blue;
 table, th, td {
    border: 2px solid white;
    text-align: center;
-    border-collapse: collapse;
+   border-collapse: collapse;
 }
 
 table.gamestatetable th, table.gamestatetable td {
@@ -195,7 +195,6 @@ table.gamestatetable th, table.gamestatetable td {
     text-align: center;
     border-collapse: collapse;
 }
-
 #MyBoard .ship{
 background-color: orange;
 }

@@ -1,5 +1,4 @@
 var gameModel;
-var scan_results;
 var scan_counter = 0;
 
 $( document ).ready(function() {
@@ -36,9 +35,13 @@ function scan() {
         }else{
             displayGameState(currModel);
             gameModel = currModel;
-            scan_counter++;}
-     //test purpose
-     //alert("this works")
+            scan_counter++;
+            if (currModel.scan_result){
+                alert("Yes, there is a ship.")
+            }else{
+                alert("Man, you waste this.")
+            }
+        }
 
    });
 
@@ -50,7 +53,6 @@ function scan() {
         document.getElementById("scan").disabled = true;
         $( document.getElementById('scan')  ).css("background-color", "gray");
     }
-//    alert("I'm an error message. I can be styled if you're interested in a small external framework. Check out SweetAlert");
 }
 
 function placeShip() {
@@ -115,6 +117,7 @@ function fire(){
 
 }
 
+
 function log(logContents){
     console.log(logContents);
 }
@@ -128,6 +131,11 @@ displayShip(gameModel.battleship);
 displayShip(gameModel.dinghy);
 displayShip(gameModel.clipper);
 displayShip(gameModel.submarine);
+
+document.getElementById("playerhits").innerHTML = gameModel.computerHits.length;
+document.getElementById("AIhits").innerHTML = gameModel.playerHits.length;
+document.getElementById("playermisses").innerHTML = gameModel.computerMisses.length;
+document.getElementById("AImisses").innerHTML = gameModel.playerMisses.length;
 
 
 for (var i = 0; i < gameModel.computerMisses.length; i++) {
