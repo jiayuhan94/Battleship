@@ -86,7 +86,13 @@ public class Main {
             return gson.toJson(currModel);
         }else{
             currModel.shootAtComputer(rowInt,colInt);
-            currModel.shootAtPlayer();
+            if(currModel.ezmode){
+            currModel.shootAtPlayer(); // this should be the easy mode fire
+            }else if (currModel.lasthit){
+                currModel.hardfire(); // this is the hard mode fire following shot
+            }else{
+                currModel.shootAtPlayer(); // this is the hard mode random shot
+            }
             Gson gson = new Gson();
             return gson.toJson(currModel);
         }
