@@ -26,14 +26,18 @@ public class BattleshipModel {
 
     public boolean scan_result;
     public String error_message;
-    //playerHitpoints to count how many hits player has taken, when it equals to 14, computer wins
-    //computerHitpoints to count how many hits AI has taken, when it equals to 14, player wins
+    //playershipsank = 5, player lose
+    //computershipsank = 5, player win
     public int playershipsank = 0;
     public int computershipsank = 0;
     public int rowShoot = 0;
     public int colShoot = 1;
     public String AI_win = "You lose...T_T";
     public String Player_win = "You WIN!!! ^_^";
+
+    public boolean ezmode = false;
+    public boolean lasthit = false;
+    public Coordinate nextpoint;
 
 
     public BattleshipModel() {
@@ -139,34 +143,126 @@ public class BattleshipModel {
         }
 
 
-        Coordinate coor = new Coordinate(rowShoot,colShoot);
-        if(playerMisses.contains(coor)){
-            System.out.println("Dupe");
+        Coordinate coor = new Coordinate(rowShoot, colShoot);
+        if(checkAIhit(rowShoot, colShoot) || checkAImiss(rowShoot, colShoot)){
+            // check if random shot is repeated, if yes, recurse, if no, continue
+            shootAtPlayer();
+        }else{
+            if(ACcover(coor) || BScover(coor) || CLcover(coor) || DHcover(coor) || SMcover(coor)){
+                playerHits.add(coor);
+            } else {
+                playerMisses.add(coor);
+                lasthit = false;
+            }
         }
+    }
 
-
+    //each ship has a boolean to check whether the shot hits or misses, if hit, modify the game state
+    public boolean ACcover(Coordinate coor){
         if(aircraftCarrier.covers(coor)){
-            playerHits.add(coor);
             aircraftCarrier.health -= 1;
             checkplayerhealth(aircraftCarrier.health);
-        }else if (battleship.covers(coor)){
-            playerHits.add(coor);
+            lasthit = true;
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public boolean BScover(Coordinate coor){
+        if (battleship.covers(coor)){
             battleship.health -= 1;
             checkplayerhealth(battleship.health);
-        }else if (clipper.covers(coor)){
-            playerHits.add(coor);
+            lasthit = true;
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public boolean CLcover(Coordinate coor){
+        if (clipper.covers(coor)){
             clipper.health -= 1;
             checkplayerhealth(clipper.health);
-        }else if (dinghy.covers(coor)){
-            playerHits.add(coor);
+            lasthit = true;
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public boolean DHcover(Coordinate coor){
+        if (dinghy.covers(coor)){
             dinghy.health -= 1;
             checkplayerhealth(dinghy.health);
-        }else if (submarine.covers(coor)){
-            playerHits.add(coor);
+            lasthit = true;
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public boolean SMcover(Coordinate coor){
+        if (submarine.covers(coor)){
             submarine.health -= 1;
             checkplayerhealth(submarine.health);
-        } else {
-            playerMisses.add(coor);
+            lasthit = true;
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public void hardfire(){
+        if(aircraftCarrier.health != 0 || aircraftCarrier.health != 5){
+            getnextpoint(aircraftCarrier.start, aircraftCarrier.end);
+            if (ACcover(nextpoint)) {
+                playerHits.add(nextpoint);
+            }else{
+                playerMisses.add(nextpoint);
+                lasthit = false;
+            }
+        }else if(battleship.health != 0 || battleship.health != 4){
+            getnextpoint(battleship.start, battleship.end);
+            if (BScover(nextpoint)){
+                playerHits.add(nextpoint);
+            }else{
+                playerMisses.add(nextpoint);
+                lasthit = false;
+            }
+        }else if(submarine.health != 0 || submarine.health != 3){
+            getnextpoint(submarine.start, submarine.end);
+            if (SMcover(nextpoint)){
+                playerHits.add(nextpoint);
+            }else{
+                playerMisses.add(nextpoint);
+                lasthit = false;
+            }
+        }else{
+            shootAtPlayer();
+        }
+    }
+
+    public Coordinate getnextpoint(Coordinate start, Coordinate end){
+        nextpoint = null;
+        int x = 0;
+        int y = 0;
+        if(start.Across == end.Across){
+            x = start.Across;
+            y = start.Across;
+            while(checkAIhit(x, y) == true){
+                y += 1;
+            }
+            nextpoint = new Coordinate(x, y);
+            return nextpoint;
+        }else{
+            x = start.Across;
+            y = start.Across;
+            while (checkAIhit(x,y) == true){
+                x += 1;
+            }
+            nextpoint = new Coordinate(x, y);
+            return nextpoint;
         }
     }
 
@@ -186,7 +282,6 @@ public class BattleshipModel {
     public boolean checkfirepoint(int row, int col){
         int hitsize = computerHits.size();
         int missize = computerMisses.size();
-
         int i = 0;
         int j = 0;
         while( i < hitsize) {
@@ -201,6 +296,38 @@ public class BattleshipModel {
         }
         while( j < missize){
             Coordinate m = computerMisses.get(j);
+            int xmiss = m.Across;
+            int ymiss = m.Down;
+            if(row == xmiss && col == ymiss){
+                return true;
+            }else{
+                j += 1;
+            }
+        }
+        return false;
+    }
+
+    public boolean checkAIhit(int row, int col){
+        int hitsize = playerHits.size();
+        int i = 0;
+        while( i < hitsize) {
+            Coordinate z = playerHits.get(i);
+            int xhit = z.Across;
+            int yhit = z.Down;
+            if (row == xhit && col == yhit){
+                return true;
+            }else{
+                i += 1;
+            }
+        }
+        return false;
+    }
+
+    public boolean checkAImiss(int row, int col){
+        int missize = playerMisses.size();
+        int j = 0;
+        while( j < missize){
+            Coordinate m = playerMisses.get(j);
             int xmiss = m.Across;
             int ymiss = m.Down;
             if(row == xmiss && col == ymiss){
