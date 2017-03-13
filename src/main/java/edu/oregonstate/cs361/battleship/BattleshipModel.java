@@ -1,7 +1,6 @@
 package edu.oregonstate.cs361.battleship;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * Created by michaelhilton on 1/4/17.
@@ -10,16 +9,12 @@ public class BattleshipModel {
 
     private Ship aircraftCarrier = new Ship("AircraftCarrier",5, new Coordinate(0,0),new Coordinate(0,0));
     private StealthShip battleship = new StealthShip("Battleship",4, new Coordinate(0,0),new Coordinate(0,0));
-    //private Ship cruiser = new Ship("Cruiser",3, new Coordinate(0,0),new Coordinate(0,0));
-    //private Ship destroyer = new Ship("Destroyer",2, new Coordinate(0,0),new Coordinate(0,0));
     private StealthShip submarine = new StealthShip("Submarine",3, new Coordinate(0,0),new Coordinate(0,0));
     private Civilian clipper = new Civilian("Clipper", 3, new Coordinate(0, 0), new Coordinate(0, 0));
     private Civilian dinghy = new Civilian("Dinghy", 1, new Coordinate(0,0), new Coordinate(0, 0));
 
     private Ship computer_aircraftCarrier = new Ship("Computer_AircraftCarrier",5, new Coordinate(2,2),new Coordinate(2,6));
     private StealthShip computer_battleship = new StealthShip("Computer_Battleship",4, new Coordinate(2,8),new Coordinate(5,8));
-    //private Ship computer_cruiser = new Ship("Computer_Cruiser",3, new Coordinate(4,1),new Coordinate(4,4));
-    //private Ship computer_destroyer = new Ship("Computer_Destroyer",2, new Coordinate(7,3),new Coordinate(7,5));
     private StealthShip computer_submarine = new StealthShip("Computer_Submarine",3, new Coordinate(9,6),new Coordinate(9,8));
     private Civilian computer_clipper = new Civilian("Computer_Clipper", 3, new Coordinate(5, 1), new Coordinate(5, 3));
     private Civilian computer_dinghy = new Civilian("Computer_Dinghy", 1, new Coordinate(1,1), new Coordinate(1, 1));
@@ -35,6 +30,8 @@ public class BattleshipModel {
     //computerHitpoints to count how many hits AI has taken, when it equals to 14, player wins
     public int playershipsank = 0;
     public int computershipsank = 0;
+    public int rowShoot = 0;
+    public int colShoot = 1;
     public String AI_win = "You lose...T_T";
     public String Player_win = "You WIN!!! ^_^";
 
@@ -127,15 +124,22 @@ public class BattleshipModel {
     }
 
     public void shootAtPlayer() {
-        double randomRow = Math.random() * 10 + 1;
-        double randomCol = Math.random() * 10 + 1;
         int max = 10;
         int min = 1;
-        Random random = new Random();
-        int randRow = random.nextInt(max - min + 1) + min;
-        int randCol = random.nextInt(max - min + 1) + min;
+        if(rowShoot < 10) {
+            rowShoot += 1;
+        }
+        else if(rowShoot == max) {
+            rowShoot = min;
+            colShoot += 2;
+            if(colShoot > max)
+            {
+                colShoot = 2;
+            }
+        }
 
-        Coordinate coor = new Coordinate(randRow,randCol);
+
+        Coordinate coor = new Coordinate(rowShoot,colShoot);
         if(playerMisses.contains(coor)){
             System.out.println("Dupe");
         }
