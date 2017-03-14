@@ -72,9 +72,12 @@ function placeShip() {
    });
 
    request.done(function( currModel ) {
-     displayGameState(currModel);
-     gameModel = currModel;
-
+        if (currModel.error_message != null){
+            alert(currModel.error_message)
+         }else{
+            displayGameState(currModel);
+            gameModel = currModel;
+         }
    });
 
    request.fail(function( jqXHR, textStatus ) {
