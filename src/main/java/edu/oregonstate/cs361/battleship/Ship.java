@@ -8,7 +8,6 @@ public class Ship {
     protected int length;
     protected Coordinate start;
     protected Coordinate end;
-    protected boolean Stealth;
     protected int health;
 
     public Ship(){
@@ -23,7 +22,6 @@ public class Ship {
         length = l;
         start = s;
         end = e;
-        Stealth = false;
         health = l;
     }
 
@@ -56,8 +54,4 @@ public class Ship {
         }
         return false;
     }
-    public boolean getStealth() {
-        return Stealth;
-    }
-
 }
