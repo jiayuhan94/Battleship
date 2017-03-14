@@ -11,14 +11,14 @@ public class BattleshipModel {
     private MilitaryShip aircraftCarrier = new MilitaryShip("AircraftCarrier", 5, new Coordinate(0, 0), new Coordinate(0, 0), false);
     private MilitaryShip battleship = new MilitaryShip("Battleship", 4, new Coordinate(0, 0), new Coordinate(0, 0), true);
     private MilitaryShip submarine = new MilitaryShip("Submarine", 3, new Coordinate(0, 0), new Coordinate(0, 0), true);
-    private Civilian clipper = new Civilian("Clipper", 3, new Coordinate(0, 0), new Coordinate(0, 0));
-    private Civilian dinghy = new Civilian("Dinghy", 1, new Coordinate(0, 0), new Coordinate(0, 0));
+    private CivilianShip clipper = new CivilianShip("Clipper", 3, new Coordinate(0, 0), new Coordinate(0, 0));
+    private CivilianShip dinghy = new CivilianShip("Dinghy", 1, new Coordinate(0, 0), new Coordinate(0, 0));
 
     private MilitaryShip computer_aircraftCarrier = new MilitaryShip("Computer_AircraftCarrier", 5, new Coordinate(0, 0), new Coordinate(0, 0), false);
     private MilitaryShip computer_battleship = new MilitaryShip("Computer_Battleship", 4, new Coordinate(0, 0), new Coordinate(0, 0), true);
     private MilitaryShip computer_submarine = new MilitaryShip("Computer_Submarine", 3,  new Coordinate(0, 0), new Coordinate(0, 0), true);
-    private Civilian computer_clipper = new Civilian("Computer_Clipper", 3,  new Coordinate(0, 0), new Coordinate(0, 0));
-    private Civilian computer_dinghy = new Civilian("Computer_Dinghy", 1,  new Coordinate(0, 0), new Coordinate(0, 0));
+    private CivilianShip computer_clipper = new CivilianShip("Computer_Clipper", 3,  new Coordinate(0, 0), new Coordinate(0, 0));
+    private CivilianShip computer_dinghy = new CivilianShip("Computer_Dinghy", 1,  new Coordinate(0, 0), new Coordinate(0, 0));
 
     public ArrayList<Coordinate> playerHits;
     public ArrayList<Coordinate> playerMisses;
@@ -117,23 +117,23 @@ public class BattleshipModel {
         Coordinate coor = new Coordinate(row, col);
         if (computer_aircraftCarrier.covers(coor)) {
             computerHits.add(coor);
-            computer_aircraftCarrier.health -= 1;
+            computer_aircraftCarrier.shipHit();
             checkcomputerhealth(computer_aircraftCarrier.health);
         } else if (computer_battleship.covers(coor)) {
             computerHits.add(coor);
-            computer_battleship.health -= 1;
+            computer_battleship.shipHit();
             checkcomputerhealth(computer_battleship.health);
         } else if (computer_clipper.covers(coor)) {
             computerHits.add(coor);
-            computer_clipper.health -= 1;
+            computer_clipper.shipHit();
             checkcomputerhealth(computer_clipper.health);
         } else if (computer_dinghy.covers(coor)) {
             computerHits.add(coor);
-            computer_dinghy.health -= 1;
+            computer_dinghy.shipHit();
             checkcomputerhealth(computer_dinghy.health);
         } else if (computer_submarine.covers(coor)) {
             computerHits.add(coor);
-            computer_submarine.health -= 1;
+            computer_submarine.shipHit();
             checkcomputerhealth(computer_submarine.health);
         } else {
             computerMisses.add(coor);
@@ -213,7 +213,7 @@ public class BattleshipModel {
     //each ship has a boolean to check whether the shot hits or misses, if hit, modify the game state
     public boolean ACcover(Coordinate coor){
         if(aircraftCarrier.covers(coor)){
-            aircraftCarrier.health -= 1;
+            aircraftCarrier.shipHit();
             checkplayerhealth(aircraftCarrier.health);
             lasthit = true;
             return true;
@@ -224,7 +224,7 @@ public class BattleshipModel {
 
     public boolean BScover(Coordinate coor){
         if (battleship.covers(coor)){
-            battleship.health -= 1;
+            battleship.shipHit();
             checkplayerhealth(battleship.health);
             lasthit = true;
             return true;
@@ -235,7 +235,7 @@ public class BattleshipModel {
 
     public boolean CLcover(Coordinate coor){
         if (clipper.covers(coor)){
-            clipper.health -= 1;
+            clipper.shipHit();
             checkplayerhealth(clipper.health);
             lasthit = true;
             return true;
@@ -246,7 +246,7 @@ public class BattleshipModel {
 
     public boolean DHcover(Coordinate coor){
         if (dinghy.covers(coor)){
-            dinghy.health -= 1;
+            dinghy.shipHit();
             checkplayerhealth(dinghy.health);
             lasthit = true;
             return true;
@@ -257,7 +257,7 @@ public class BattleshipModel {
 
     public boolean SMcover(Coordinate coor){
         if (submarine.covers(coor)){
-            submarine.health -= 1;
+            submarine.shipHit();
             checkplayerhealth(submarine.health);
             lasthit = true;
             return true;
@@ -394,15 +394,15 @@ public class BattleshipModel {
 
     public boolean scanPlayer(int row, int col ) {
         Coordinate coor = new Coordinate(row,col);
-        if((computer_aircraftCarrier.covers(coor)) && (computer_aircraftCarrier.stealth == false)){
+        if((computer_aircraftCarrier.shipScan(coor))){
             return true;
-        }else if ((computer_battleship.covers(coor)) && (computer_battleship.stealth == false)){
+        }else if ((computer_battleship.shipScan(coor))){
             return true;
-        }else if ((computer_submarine.covers(coor))  && (computer_submarine.stealth == false)){
+        }else if ((computer_submarine.shipScan(coor))){
             return true;
-        }else if ((computer_clipper.covers(coor))){
+        }else if ((computer_clipper.shipScan(coor))){
             return true;
-        }else if ((computer_dinghy.covers(coor))){
+        }else if ((computer_dinghy.shipScan(coor))){
             return true;
         } else {
             return false;

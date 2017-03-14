@@ -13,4 +13,14 @@ public class MilitaryShip extends Ship{
         stealth = st;
         health = l;
     }
+    //overrides shipScan() in Ship object
+    public boolean shipScan(Coordinate test) {
+        //return false for scan if ship has stealth
+        if(stealth) {
+            return false;
+        }
+        else {
+            return covers(test);
+        }
+    }
 }

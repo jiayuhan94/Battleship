@@ -10,14 +10,14 @@ public class Ship {
     protected Coordinate end;
     protected int health;
 
-    public Ship(){
+    public Ship() {
         name = "null";
         length = -1;
         start = start;
         end = end;
     }
 
-    public Ship(String n, int l,Coordinate s, Coordinate e) {
+    public Ship(String n, int l, Coordinate s, Coordinate e) {
         name = n;
         length = l;
         start = s;
@@ -32,9 +32,9 @@ public class Ship {
 
     public boolean covers(Coordinate test) {
         //horizontal
-        if(start.getAcross() == end.getAcross()){
-            if(test.getAcross() == start.getAcross()){
-                if((test.getDown() >= start.getDown()) &&
+        if (start.getAcross() == end.getAcross()) {
+            if (test.getAcross() == start.getAcross()) {
+                if ((test.getDown() >= start.getDown()) &&
                         (test.getDown() <= end.getDown()))
                     return true;
             } else {
@@ -42,9 +42,9 @@ public class Ship {
             }
         }
         //vertical
-        else{
-            if(test.getDown() == start.getDown()){
-                if((test.getAcross() >= start.getAcross()) &&
+        else {
+            if (test.getDown() == start.getDown()) {
+                if ((test.getAcross() >= start.getAcross()) &&
                         (test.getAcross() <= end.getAcross()))
                     return true;
             } else {
@@ -53,5 +53,12 @@ public class Ship {
 
         }
         return false;
+    }
+
+    public boolean shipScan(Coordinate test) {
+        return covers(test);
+    }
+    public void shipHit(){
+        health -= 1;
     }
 }
