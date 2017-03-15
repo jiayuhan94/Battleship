@@ -187,7 +187,7 @@ public class BattleshipModel {
         computer_dinghy.end = new Coordinate(1,1);
     }
 
-    public void randFire() {
+    public void randFire() {  //should this be ranamed to hardFire to match the ezFire? -Stewart
         int max = 10;
         int min = 1;
         Random random = new Random();
@@ -392,7 +392,7 @@ public class BattleshipModel {
         return false;
     }
 
-    public boolean scanPlayer(int row, int col ) {
+    public boolean scanPlayer(int row, int col ) { // Shouldn't the battleship and sub return false? Something for wednesday's meeting -Stewart
         Coordinate coor = new Coordinate(row,col);
         if((computer_aircraftCarrier.shipScan(coor))){
             return true;
