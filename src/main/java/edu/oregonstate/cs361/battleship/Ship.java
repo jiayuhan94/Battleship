@@ -33,7 +33,7 @@ public class Ship {
     public boolean covers(Coordinate test) {
         //horizontal
         if (start.getAcross() == end.getAcross()) {
-            if (test.getAcross() == start.getAcross()) {
+            if (test.getAcross() == start.getAcross()) {   //This is a bit hard to follow, some comments could be helpfull. -Stewart
                 if ((test.getDown() >= start.getDown()) &&
                         (test.getDown() <= end.getDown()))
                     return true;
@@ -43,7 +43,7 @@ public class Ship {
         }
         //vertical
         else {
-            if (test.getDown() == start.getDown()) {
+            if (test.getDown() == start.getDown()) {  //Same as previous. -Stewart
                 if ((test.getAcross() >= start.getAcross()) &&
                         (test.getAcross() <= end.getAcross()))
                     return true;
