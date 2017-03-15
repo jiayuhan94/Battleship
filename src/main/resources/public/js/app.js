@@ -9,7 +9,7 @@ $( document ).ready(function() {
    });
 });
 
-function cancelShips() {
+function submit() {
     div = document.getElementById('place-ships');
     div.style.display = "none";
     document.getElementById("scan").disabled = false;
