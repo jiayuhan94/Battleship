@@ -76,41 +76,119 @@ public class BattleshipModel {
     public BattleshipModel placeShip(String shipName, String row, String col, String orientation, BattleshipModel currModel) {
         int rowint = Integer.parseInt(row);
         int colInt = Integer.parseInt(col);
-        if (orientation.equals("horizontal")) {
+        error_message = null;
+        if(orientation.equals("horizontal")){
             if (shipName.equalsIgnoreCase("aircraftcarrier")) {
-                currModel.getShip(shipName).setLocation(new Coordinate(rowint, colInt), new Coordinate(rowint, colInt + 4));
-            }
-            if (shipName.equalsIgnoreCase("battleship")) {
-                currModel.getShip(shipName).setLocation(new Coordinate(rowint, colInt), new Coordinate(rowint, colInt + 3));
-            }
-            if (shipName.equalsIgnoreCase("clipper")) {
-                currModel.getShip(shipName).setLocation(new Coordinate(rowint, colInt), new Coordinate(rowint, colInt + 2));
-            }
-            if (shipName.equalsIgnoreCase("dinghy")) {
-                currModel.getShip(shipName).setLocation(new Coordinate(rowint, colInt), new Coordinate(rowint, colInt));
-            }
-            if (shipName.equalsIgnoreCase("submarine")) {
-                currModel.getShip(shipName).setLocation(new Coordinate(rowint, colInt), new Coordinate(rowint, colInt + 2));
+                if (checkplayeroverlap(new Coordinate(rowint,colInt),new Coordinate(rowint,colInt+4))){
+                currModel.getShip(shipName).setLocation(new Coordinate(rowint,colInt),new Coordinate(rowint,colInt+4));
+                } else{
+                    error_message = "Ship is overlapping.\n Please pick another location.";
+                }
+            } if(shipName.equalsIgnoreCase("battleship")) {
+                if (checkplayeroverlap(new Coordinate(rowint,colInt),new Coordinate(rowint,colInt+3))){
+                currModel.getShip(shipName).setLocation(new Coordinate(rowint,colInt),new Coordinate(rowint,colInt+3));
+                } else{
+                    error_message = "Ship is overlapping.\n Please pick another location.";
+                }
+            } if(shipName.equalsIgnoreCase("clipper")) {
+                if (checkplayeroverlap(new Coordinate(rowint,colInt),new Coordinate(rowint,colInt+2))){
+                    currModel.getShip(shipName).setLocation(new Coordinate(rowint,colInt),new Coordinate(rowint,colInt+2));
+                } else{
+                    error_message = "Ship is overlapping.\n Please pick another location.";
+                }
+            } if(shipName.equalsIgnoreCase("dinghy")) {
+                if (checkplayeroverlap(new Coordinate(rowint,colInt),new Coordinate(rowint,colInt))){
+                    currModel.getShip(shipName).setLocation(new Coordinate(rowint,colInt),new Coordinate(rowint,colInt));
+                } else{
+                    error_message = "Ship is overlapping.\n Please pick another location.";
+                }
+            }if(shipName.equalsIgnoreCase("submarine")) {
+                if (checkplayeroverlap(new Coordinate(rowint,colInt),new Coordinate(rowint,colInt+2))){
+                    currModel.getShip(shipName).setLocation(new Coordinate(rowint,colInt),new Coordinate(rowint,colInt+2));
+                } else{
+                    error_message = "Ship is overlapping.\n Please pick another location.";
+                }
             }
         } else {
             //vertical
-            if (shipName.equalsIgnoreCase("aircraftcarrier")) {
-                currModel.getShip(shipName).setLocation(new Coordinate(rowint, colInt), new Coordinate(rowint + 4, colInt));
-            }
-            if (shipName.equalsIgnoreCase("battleship")) {
-                currModel.getShip(shipName).setLocation(new Coordinate(rowint, colInt), new Coordinate(rowint + 3, colInt));
-            }
-            if (shipName.equalsIgnoreCase("clipper")) {
-                currModel.getShip(shipName).setLocation(new Coordinate(rowint, colInt), new Coordinate(rowint + 2, colInt));
-            }
-            if (shipName.equalsIgnoreCase("dinghy")) {
-                currModel.getShip(shipName).setLocation(new Coordinate(rowint, colInt), new Coordinate(rowint, colInt));
-            }
-            if (shipName.equalsIgnoreCase("submarine")) {
-                currModel.getShip(shipName).setLocation(new Coordinate(rowint, colInt), new Coordinate(rowint + 2, colInt));
-            }
+                if (shipName.equalsIgnoreCase("aircraftcarrier")) {
+                    if (checkplayeroverlap(new Coordinate(rowint,colInt),new Coordinate(rowint+4,colInt))){
+                        currModel.getShip(shipName).setLocation(new Coordinate(rowint,colInt),new Coordinate(rowint+4,colInt));
+                    } else{
+                        error_message = "Ship is overlapping.\n Please pick another location.";
+                    }
+                } if(shipName.equalsIgnoreCase("battleship")) {
+                    if (checkplayeroverlap(new Coordinate(rowint,colInt),new Coordinate(rowint+3,colInt))){
+                        currModel.getShip(shipName).setLocation(new Coordinate(rowint,colInt),new Coordinate(rowint+3,colInt));
+                    } else{
+                        error_message = "Ship is overlapping.\n Please pick another location.";
+                    }
+                } if(shipName.equalsIgnoreCase("clipper")) {
+                    if (checkplayeroverlap(new Coordinate(rowint,colInt),new Coordinate(rowint+2,colInt))){
+                        currModel.getShip(shipName).setLocation(new Coordinate(rowint,colInt),new Coordinate(rowint+2,colInt));
+                    } else{
+                        error_message = "Ship is overlapping.\n Please pick another location.";
+                    }
+                } if(shipName.equalsIgnoreCase("dinghy")) {
+                    if (checkplayeroverlap(new Coordinate(rowint,colInt),new Coordinate(rowint,colInt))){
+                        currModel.getShip(shipName).setLocation(new Coordinate(rowint,colInt),new Coordinate(rowint,colInt));
+                    } else{
+                        error_message = "Ship is overlapping.\n Please pick another location.";
+                    }
+                }if(shipName.equalsIgnoreCase("submarine")) {
+                    if (checkplayeroverlap(new Coordinate(rowint,colInt),new Coordinate(rowint+2,colInt))){
+                        currModel.getShip(shipName).setLocation(new Coordinate(rowint,colInt),new Coordinate(rowint+2,colInt));
+                    } else{
+                        error_message = "Ship is overlapping.\n Please pick another location.";
+                    }
+                }
         }
         return currModel;
+    }
+
+    public boolean checkplayeroverlap(Coordinate start, Coordinate end){
+        int x = start.Across;
+        int y = start.Down;
+        int m = end.Across;
+        int n = end.Down;
+        Coordinate coor = new Coordinate(x,y);
+
+        if(x == m){
+            //vertical
+            if (y == n){
+                if (aircraftCarrier.covers(coor)|| battleship.covers(coor)|| submarine.covers(coor)|| clipper.covers(coor)|| dinghy.covers(coor)){
+                    return false;
+                }else{
+                    return true;
+                }
+            }else{
+                while(y < n){
+                    if (aircraftCarrier.covers(coor)|| battleship.covers(coor)|| submarine.covers(coor)|| clipper.covers(coor)|| dinghy.covers(coor)){
+                        return false;
+                    }else{
+                        y += 1;
+                    }
+                }
+            }
+        }else{
+            //horizontal
+            if (x == m){
+                if (aircraftCarrier.covers(coor)|| battleship.covers(coor)|| submarine.covers(coor)|| clipper.covers(coor)|| dinghy.covers(coor)){
+                    return false;
+                }else{
+                    return true;
+                }
+            }else{
+                while(x < m){
+                    if (aircraftCarrier.covers(coor)|| battleship.covers(coor)|| submarine.covers(coor)|| clipper.covers(coor)|| dinghy.covers(coor)){
+                        return false;
+                    }else{
+                        x += 1;
+                    }
+                }
+            }
+        }
+        return true;
     }
 
     public void shootAtComputer(int row, int col) {
