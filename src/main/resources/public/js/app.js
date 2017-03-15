@@ -9,11 +9,20 @@ $( document ).ready(function() {
    });
 });
 
-function cancelShips() {
+function submit() {
     div = document.getElementById('place-ships');
     div.style.display = "none";
     document.getElementById("scan").disabled = false;
     document.getElementById("fire").disabled = false;
+
+    console.log($("input[name='diffSelec']:checked").val());
+    var request = $.ajax({
+            url: "/submit/"+$( "input[name='diffSelec']:checked" ).val(),
+            method: "post",
+            data: JSON.stringify(gameModel),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+    });
 }
 function scan() {
     if (scan_counter < 3){
@@ -72,9 +81,12 @@ function placeShip() {
    });
 
    request.done(function( currModel ) {
-     displayGameState(currModel);
-     gameModel = currModel;
-
+        if (currModel.error_message != null){
+            alert(currModel.error_message)
+         }else{
+            displayGameState(currModel);
+            gameModel = currModel;
+         }
    });
 
    request.fail(function( jqXHR, textStatus ) {

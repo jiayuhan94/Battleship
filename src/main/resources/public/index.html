@@ -5,9 +5,18 @@
     <title></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <script>
+    function checkDiff(option) {
+        var buttons = document.getElementsByName(option.name);
+        for (i = 0; i < buttons.length; i++) {
+            buttons[i].disabled = true;
+        }
+    }
+    </script>
 </head>
 <script src="/js/vendor/jquery-1.12.4.min.js"></script>
 <script src="/js/app.js"></script>
+
 
 <body>
 
@@ -26,7 +35,15 @@
             <h1>Console</h1>
             <button id="new" onClick="window.location.reload();">New Game</button>
             <div id="place-ships">
-                <ul><h2>Ship Type</h2>
+                <ul>
+                    <h2>Difficulty</h2>
+                    <div id="diff">
+                        <li><input type="radio" name="diffSelec" id="easy" value="easy" checked="checked" onclick="checkDiff(this);" /><label for="easy">Easy</label></li>
+                    </div>
+                    <div id="diff">
+                        <li><input type="radio" name="diffSelec" id="hard" value="hard" onclick="checkDiff(this);" /><label for="hard">Hard</label></li>
+                    </div>
+                    <h2>Ship Type</h2>
                     <div id="AircraftcarrierDiv">
                         <div class="shipSelect">
                         <select name="shipSelec" id="shipSelec">
@@ -78,7 +95,7 @@
                     </div>
                 </ul>
                 <button id="place" type="button" onclick="javascript:placeShip();">Place</button>
-                <button id="cancel" onclick="javascript:cancelShips();">Submit</button>
+                <button id="submit" onclick="javascript:submit();">Submit</button>
             </div>
             <div class="instruction">
                 <h1>Instructions</h1>

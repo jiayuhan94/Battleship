@@ -31,6 +31,8 @@ public class Main {
         post("/scan/:row/:col", (req, res) -> Scan(req));
         //This will listen to POST requests and expects to receive a game model, as well as location to place the ship
         post("/placeShip/:id/:row/:col/:orientation", (req, res) -> placeShip(req));
+        //This will listen to POST requests and expects to receive a game model, as well as game difficulty
+        post("/submit/:type", (req, res) -> setMode(req));
     }
 
     //This function returns a new model
@@ -60,14 +62,25 @@ public class Main {
         String row = req.params("row");
         String col = req.params("col");
         String orientation = req.params("orientation");
+        currModel.ezPlace(); // this is easy mode fixed ship placement
         currModel = currModel.placeShip(id,row,col,orientation,currModel);
         Gson gson = new Gson();
         return gson.toJson(currModel);
+    }
 
+    private static String setMode(Request req){
+        BattleshipModel currModel = getModelFromReq(req);
+        String mode = req.params("type");
+        if(mode.contains("hard")){
+            currModel.setEzmode(1);
+        }else{
+            currModel.setEzmode(0);
+        }
+        Gson gson = new Gson();
+        return gson.toJson(currModel);
     }
 
     private static String fireAt(Request req) {
-
         BattleshipModel currModel = getModelFromReq(req);
         String row = req.params("row");
         String col = req.params("col");
@@ -87,11 +100,11 @@ public class Main {
         }else{
             currModel.shootAtComputer(rowInt,colInt);
             if(currModel.ezmode){
-            currModel.shootAtPlayer(); // this should be the easy mode fire
+            currModel.ezFire(); // this is easy mode pattern firing
             }else if (currModel.lasthit){
                 currModel.hardfire(); // this is the hard mode fire following shot
             }else{
-                currModel.shootAtPlayer(); // this is the hard mode random shot
+                currModel.randFire(); // this is the hard mode random shot
             }
             Gson gson = new Gson();
             return gson.toJson(currModel);
@@ -99,7 +112,6 @@ public class Main {
     }
 
     private static String Scan(Request req) {
-
         BattleshipModel currModel = getModelFromReq(req);
      //   String results;
         String row = req.params("row");
@@ -127,7 +139,14 @@ public class Main {
         }else{
             currModel.scan_result = false;
         }
-        currModel.shootAtPlayer();
+        if(currModel.ezmode) {
+            currModel.ezFire(); // this is easy mode pattern firing
+        }else if (currModel.lasthit){
+            currModel.hardfire(); // this is the hard mode fire following shot
+        }else{
+            currModel.randFire(); // this is the hard mode random shot
+        }
+
     //    return currModel.results;
         Gson gson = new Gson();
         return gson.toJson(currModel);
