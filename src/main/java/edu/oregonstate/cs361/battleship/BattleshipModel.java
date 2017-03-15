@@ -486,4 +486,12 @@ public class BattleshipModel {
             return false;
         }
     }
+
+    public void setEzmode(int i){
+        if(i == 0){
+            ezmode = true;
+        }else{
+            ezmode = false;
+        }
+    }
 }
