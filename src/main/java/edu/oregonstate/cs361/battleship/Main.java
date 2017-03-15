@@ -71,7 +71,7 @@ public class Main {
     private static String setMode(Request req){
         BattleshipModel currModel = getModelFromReq(req);
         String mode = req.params("type");
-        if(mode == "hard"){
+        if(mode.contains("hard")){
             currModel.setEzmode(1);
         }else{
             currModel.setEzmode(0);
