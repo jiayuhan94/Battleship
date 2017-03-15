@@ -7,7 +7,7 @@ public class CivilianShip extends Ship {
 
     public CivilianShip(String n, int l, Coordinate s, Coordinate e) {
         name = n;
-        length = l;
+        length = l; //Does this affect only the dingy? The Clipper is suposed to be size 3. We can bring it up on Wednesday's meeting. -Stewart
         start = s;
         end = e;
         health = l;
