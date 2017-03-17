@@ -146,6 +146,133 @@ public class BattleshipModel {
         return currModel;
     }
 
+    //easy mode computer ships placement
+    public void ezPlace() {
+        computer_aircraftCarrier.start = new Coordinate(2,2);
+        computer_aircraftCarrier.end = new Coordinate(2,6);
+
+        computer_battleship.start = new Coordinate(2,8);
+        computer_battleship.end = new Coordinate(5,8);
+
+        computer_submarine.start = new Coordinate(9,6);
+        computer_submarine.end = new Coordinate(9,8);
+
+        computer_clipper.start = new Coordinate(5,1);
+        computer_clipper.end = new Coordinate(5,3);
+
+        computer_dinghy.start = new Coordinate(1,1);
+        computer_dinghy.end = new Coordinate(1,1);
+    }
+
+    //hard mode computer ships placement
+    public void hardplace(){
+        AIac();
+        AIbs();
+        AIcl();
+        AIdh();
+        AIsm();
+    }
+
+    private void AIac(){
+        int max = 10;
+        int min = 1;
+        Random random = new Random();
+        int randRow = random.nextInt(max - min + 1) + min;
+        int randCol = random.nextInt(max - min + 1) + min;
+        int x = randRow;
+        int y = randCol;
+        int orientation = random.nextInt(max - min +1) + min;
+        Coordinate start = new Coordinate(randRow,randCol);
+        if(orientation <= 5){//horizontal
+            x = randRow + 4;}
+        else{//vertical
+            y = randCol + 4;}
+        Coordinate end = new Coordinate(x, y);
+        if(checkAIplace(start, end)){
+            computer_aircraftCarrier.setLocation(start, end);
+        }else{AIac();}
+    }
+
+    private void AIbs(){
+        int max = 10;
+        int min = 1;
+        Random random = new Random();
+        int randRow = random.nextInt(max - min + 1) + min;
+        int randCol = random.nextInt(max - min + 1) + min;
+        int x = randRow;
+        int y = randCol;
+        int orientation = random.nextInt(max - min +1) + min;
+        Coordinate start = new Coordinate(randRow,randCol);
+        if(orientation <= 5){//horizontal
+            x = randRow + 3;}
+        else{//vertical
+            y = randCol + 3;}
+        Coordinate end = new Coordinate(x, y);
+        if(checkAIplace(start, end)){
+            computer_battleship.setLocation(start, end);
+        }else{AIbs();}
+    }
+
+    private void AIsm(){
+        int max = 10;
+        int min = 1;
+        Random random = new Random();
+        int randRow = random.nextInt(max - min + 1) + min;
+        int randCol = random.nextInt(max - min + 1) + min;
+        int x = randRow;
+        int y = randCol;
+        int orientation = random.nextInt(max - min +1) + min;
+        Coordinate start = new Coordinate(randRow,randCol);
+        if(orientation <= 5){//horizontal
+            x = randRow + 2;}
+        else{//vertical
+            y = randCol + 2;}
+        Coordinate end = new Coordinate(x, y);
+        if(checkAIplace(start, end)){
+            computer_submarine.setLocation(start, end);
+        }else{AIsm();}
+    }
+
+    private void AIcl(){
+        int max = 10;
+        int min = 1;
+        Random random = new Random();
+        int randRow = random.nextInt(max - min + 1) + min;
+        int randCol = random.nextInt(max - min + 1) + min;
+        int x = randRow;
+        int y = randCol;
+        int orientation = random.nextInt(max - min +1) + min;
+        Coordinate start = new Coordinate(randRow,randCol);
+        if(orientation <= 5){//horizontal
+            x = randRow + 2;}
+        else{//vertical
+            y = randCol + 2;}
+        Coordinate end = new Coordinate(x, y);
+        if(checkAIplace(start, end)){
+            computer_clipper.setLocation(start, end);
+        }else{AIcl();}
+    }
+
+    private void AIdh(){
+        int max = 10;
+        int min = 1;
+        Random random = new Random();
+        int randRow = random.nextInt(max - min + 1) + min;
+        int randCol = random.nextInt(max - min + 1) + min;
+        int x = randRow;
+        int y = randCol;
+        int orientation = random.nextInt(max - min +1) + min;
+        Coordinate start = new Coordinate(randRow,randCol);
+        if(orientation <= 5){//horizontal
+            x = randRow;}
+        else{//vertical
+            y = randCol ;}
+        Coordinate end = new Coordinate(x, y);
+        if(checkAIplace(start, end)){
+            computer_dinghy.setLocation(start, end);
+        }else{AIdh();}
+    }
+
     public boolean checkplayeroverlap(Coordinate start, Coordinate end){
         int x = start.Across;
         int y = start.Down;
@@ -181,6 +308,51 @@ public class BattleshipModel {
             }else{
                 while(x < m){
                     if (aircraftCarrier.covers(coor)|| battleship.covers(coor)|| submarine.covers(coor)|| clipper.covers(coor)|| dinghy.covers(coor)){
+                        return false;
+                    }else{
+                        x += 1;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    public boolean checkAIplace(Coordinate start, Coordinate end){
+        int x = start.Across;
+        int y = start.Down;
+        int m = end.Across;
+        int n = end.Down;
+        Coordinate coor = new Coordinate(x,y);
+
+        if(x == m){
+            //vertical
+            if (y == n){
+                if (computer_aircraftCarrier.covers(coor)|| computer_battleship.covers(coor)|| computer_submarine.covers(coor)|| computer_clipper.covers(coor)|| computer_dinghy.covers(coor)){
+                    return false;
+                }else{
+                    return true;
+                }
+            }else{
+                while(y < n){
+                    if (computer_aircraftCarrier.covers(coor)|| computer_battleship.covers(coor)|| computer_submarine.covers(coor)|| computer_clipper.covers(coor)|| computer_dinghy.covers(coor)){
+                        return false;
+                    }else{
+                        y += 1;
+                    }
+                }
+            }
+        }else{
+            //horizontal
+            if (x == m){
+                if (computer_aircraftCarrier.covers(coor)|| computer_battleship.covers(coor)|| computer_submarine.covers(coor)|| computer_clipper.covers(coor)|| computer_dinghy.covers(coor)){
+                    return false;
+                }else{
+                    return true;
+                }
+            }else{
+                while(x < m){
+                    if (computer_aircraftCarrier.covers(coor)|| computer_battleship.covers(coor)|| computer_submarine.covers(coor)|| computer_clipper.covers(coor)|| computer_dinghy.covers(coor)){
                         return false;
                     }else{
                         x += 1;
@@ -248,24 +420,37 @@ public class BattleshipModel {
 
     }
 
-    public void ezPlace() {
-        computer_aircraftCarrier.start = new Coordinate(2,2);
-        computer_aircraftCarrier.end = new Coordinate(2,6);
-
-        computer_battleship.start = new Coordinate(2,8);
-        computer_battleship.end = new Coordinate(5,8);
-
-        computer_submarine.start = new Coordinate(9,6);
-        computer_submarine.end = new Coordinate(9,8);
-
-        computer_clipper.start = new Coordinate(5,1);
-        computer_clipper.end = new Coordinate(5,3);
-
-        computer_dinghy.start = new Coordinate(1,1);
-        computer_dinghy.end = new Coordinate(1,1);
+    public void hardfire(){
+        if(aircraftCarrier.health != 0 || aircraftCarrier.health != 5){
+            getnextpoint(aircraftCarrier.start, aircraftCarrier.end);
+            if (ACcover(nextpoint)) {
+                playerHits.add(nextpoint);
+            }else{
+                playerMisses.add(nextpoint);
+                lasthit = false;
+            }
+        }else if(battleship.health != 0 || battleship.health != 4){
+            getnextpoint(battleship.start, battleship.end);
+            if (BScover(nextpoint)){
+                playerHits.add(nextpoint);
+            }else{
+                playerMisses.add(nextpoint);
+                lasthit = false;
+            }
+        }else if(submarine.health != 0 || submarine.health != 3){
+            getnextpoint(submarine.start, submarine.end);
+            if (SMcover(nextpoint)){
+                playerHits.add(nextpoint);
+            }else{
+                playerMisses.add(nextpoint);
+                lasthit = false;
+            }
+        }else{
+            randFire();
+        }
     }
 
-    public void randFire() {  //should this be ranamed to hardFire to match the ezFire? -Stewart
+    public void randFire() {
         int max = 10;
         int min = 1;
         Random random = new Random();
@@ -341,36 +526,6 @@ public class BattleshipModel {
             return true;
         }else{
             return false;
-        }
-    }
-
-    public void hardfire(){
-        if(aircraftCarrier.health != 0 || aircraftCarrier.health != 5){
-            getnextpoint(aircraftCarrier.start, aircraftCarrier.end);
-            if (ACcover(nextpoint)) {
-                playerHits.add(nextpoint);
-            }else{
-                playerMisses.add(nextpoint);
-                lasthit = false;
-            }
-        }else if(battleship.health != 0 || battleship.health != 4){
-            getnextpoint(battleship.start, battleship.end);
-            if (BScover(nextpoint)){
-                playerHits.add(nextpoint);
-            }else{
-                playerMisses.add(nextpoint);
-                lasthit = false;
-            }
-        }else if(submarine.health != 0 || submarine.health != 3){
-            getnextpoint(submarine.start, submarine.end);
-            if (SMcover(nextpoint)){
-                playerHits.add(nextpoint);
-            }else{
-                playerMisses.add(nextpoint);
-                lasthit = false;
-            }
-        }else{
-            randFire();
         }
     }
 
@@ -490,8 +645,10 @@ public class BattleshipModel {
     public void setEzmode(int i){
         if(i == 0){
             ezmode = true;
+            ezPlace();
         }else{
             ezmode = false;
+            hardplace();
         }
     }
 }
