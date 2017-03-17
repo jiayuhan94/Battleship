@@ -62,7 +62,6 @@ public class Main {
         String row = req.params("row");
         String col = req.params("col");
         String orientation = req.params("orientation");
-        currModel.ezPlace(); // this is easy mode fixed ship placement
         currModel = currModel.placeShip(id,row,col,orientation,currModel);
         Gson gson = new Gson();
         return gson.toJson(currModel);
