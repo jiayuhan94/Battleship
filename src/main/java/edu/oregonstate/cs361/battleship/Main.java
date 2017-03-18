@@ -62,7 +62,6 @@ public class Main {
         String row = req.params("row");
         String col = req.params("col");
         String orientation = req.params("orientation");
-        currModel.ezPlace(); // this is easy mode fixed ship placement
         currModel = currModel.placeShip(id,row,col,orientation,currModel);
         Gson gson = new Gson();
         return gson.toJson(currModel);
@@ -71,10 +70,10 @@ public class Main {
     private static String setMode(Request req){
         BattleshipModel currModel = getModelFromReq(req);
         String mode = req.params("type");
-        if(mode.contains("hard")){
-            currModel.setEzmode(1);
+        if(mode.equalsIgnoreCase("hard")){
+            currModel.setEzmode(1, currModel);
         }else{
-            currModel.setEzmode(0);
+            currModel.setEzmode(0, currModel);
         }
         Gson gson = new Gson();
         return gson.toJson(currModel);
