@@ -70,10 +70,10 @@ public class Main {
     private static String setMode(Request req){
         BattleshipModel currModel = getModelFromReq(req);
         String mode = req.params("type");
-        if(mode.contains("hard")){
-            currModel.setEzmode(1);
+        if(mode.equalsIgnoreCase("hard")){
+            currModel.setEzmode(1, currModel);
         }else{
-            currModel.setEzmode(0);
+            currModel.setEzmode(0, currModel);
         }
         Gson gson = new Gson();
         return gson.toJson(currModel);

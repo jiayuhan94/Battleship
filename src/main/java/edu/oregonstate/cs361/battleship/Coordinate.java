@@ -16,15 +16,7 @@ public class Coordinate {
         return Down;
     }
 
-    public void setDown(int down) {
-        Down = down;
-    }
-
     public int getAcross() {
         return Across;
-    }
-
-    public void setAcross(int across) {
-        Across = across;
     }
 }
