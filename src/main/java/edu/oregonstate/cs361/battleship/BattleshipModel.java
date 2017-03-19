@@ -69,7 +69,7 @@ public class BattleshipModel {
         if (shipName.equalsIgnoreCase("submarine")) {
             return submarine;
         }if (shipName.equalsIgnoreCase("computer_aircraftcarrier")) {
-            return computer_aircraftCarrier;
+            return aircraftCarrier;
         }
         if (shipName.equalsIgnoreCase("computer_battleship")) {
             return computer_battleship;
@@ -173,10 +173,6 @@ public class BattleshipModel {
         hardgenerate("computer_submarine");
         hardgenerate("computer_dinghy");
         hardgenerate("computer_clipper");
-        AIbs();
-        AIcl();
-        AIdh();
-        AIsm();
     }
 
     private void hardgenerate(String shipName){
@@ -198,86 +194,6 @@ public class BattleshipModel {
         if(checkAIplace(start, end)){
             getShip(shipName).setLocation(start, end);
         }else{hardgenerate(shipName);}
-    }
-
-    private void AIbs(){
-        int max = 10;
-        int min = 1;
-        Random random = new Random();
-        int randRow = random.nextInt(max - min + 1) + min;
-        int randCol = random.nextInt(max - min + 1) + min;
-        int x = randRow;
-        int y = randCol;
-        int orientation = random.nextInt(max - min +1) + min;
-        Coordinate start = new Coordinate(randRow,randCol);
-        if(orientation <= 5){//horizontal
-            x = randRow + 3;}
-        else{//vertical
-            y = randCol + 3;}
-        Coordinate end = new Coordinate(x, y);
-        if(checkAIplace(start, end)){
-            computer_battleship.setLocation(start, end);
-        }else{AIbs();}
-    }
-
-    private void AIsm(){
-        int max = 10;
-        int min = 1;
-        Random random = new Random();
-        int randRow = random.nextInt(max - min + 1) + min;
-        int randCol = random.nextInt(max - min + 1) + min;
-        int x = randRow;
-        int y = randCol;
-        int orientation = random.nextInt(max - min +1) + min;
-        Coordinate start = new Coordinate(randRow,randCol);
-        if(orientation <= 5){//horizontal
-            x = randRow + 2;}
-        else{//vertical
-            y = randCol + 2;}
-        Coordinate end = new Coordinate(x, y);
-        if(checkAIplace(start, end)){
-            computer_submarine.setLocation(start, end);
-        }else{AIsm();}
-    }
-
-    private void AIcl(){
-        int max = 10;
-        int min = 1;
-        Random random = new Random();
-        int randRow = random.nextInt(max - min + 1) + min;
-        int randCol = random.nextInt(max - min + 1) + min;
-        int x = randRow;
-        int y = randCol;
-        int orientation = random.nextInt(max - min +1) + min;
-        Coordinate start = new Coordinate(randRow,randCol);
-        if(orientation <= 5){//horizontal
-            x = randRow + 2;}
-        else{//vertical
-            y = randCol + 2;}
-        Coordinate end = new Coordinate(x, y);
-        if(checkAIplace(start, end)){
-            computer_clipper.setLocation(start, end);
-        }else{AIcl();}
-    }
-
-    private void AIdh(){
-        int max = 10;
-        int min = 1;
-        Random random = new Random();
-        int randRow = random.nextInt(max - min + 1) + min;
-        int randCol = random.nextInt(max - min + 1) + min;
-        int x = randRow;
-        int y = randCol;
-        int orientation = random.nextInt(max - min +1) + min;
-        Coordinate start = new Coordinate(randRow,randCol);
-        if(orientation <= 5){//horizontal
-            x = randRow;}
-        else{//vertical
-            y = randCol ;}
-        Coordinate end = new Coordinate(x, y);
-        if(checkAIplace(start, end)){
-            computer_dinghy.setLocation(start, end);
-        }else{AIdh();}
     }
 
     private boolean checkplayeroverlap(Coordinate start, Coordinate end){
