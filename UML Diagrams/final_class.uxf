@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>20</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>80</x>
+      <y>520</y>
+      <w>420</w>
+      <h>340</h>
+    </coordinates>
+    <panel_attributes>:Main
+--
+Location
+--
+newModel()
+getModelFromReq()
+placeShip()
+fireAt()
+scan()
+setMode()
+placeShip()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1140</x>
+      <y>840</y>
+      <w>260</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1
+m2=20
+</panel_attributes>
+    <additional_attributes>10.0;20.0;110.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>480</x>
+      <y>640</y>
+      <w>300</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+Has
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>130.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1540</x>
+      <y>540</y>
+      <w>100</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=0..n 
+m2=1</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>740</x>
+      <y>140</y>
+      <w>420</w>
+      <h>1220</h>
+    </coordinates>
+    <panel_attributes>:BattleshipModel
+--
+scan_results
+error_message
+playershipsank
+computershipsank
+rowshoot
+colShoot
+AI_win
+Player_win
+exMode
+lasthit
+nextpoint
+--
+battleshipModel()
+ofStatus()
+getShip()
+getLength()
+playerplaceship()
+placeShip()
+ezPlace()
+hardplace()
+hardgenerate()
+checkplayeroverlap()
+checkAIplace()
+shootAtComputer()
+ezFire()
+hardFire()
+randFire()
+shipCover()
+getnextpoint()
+checkplayerhealth()
+checkcomputerhealth()
+checkfirepoint()
+checkAIhit()
+checkAImiss()
+cannPlayer()
+setEzmode()
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2080</x>
+      <y>40</y>
+      <w>420</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>:MilitaryShip
+--
+stealth
+--
+militaryShip()
+shipScan()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1360</x>
+      <y>180</y>
+      <w>420</w>
+      <h>380</h>
+    </coordinates>
+    <panel_attributes>:Ship
+--
+name
+length
+start
+end
+health
+--
+ship()
+setLocation()
+covers()
+shipScan()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2080</x>
+      <y>440</y>
+      <w>420</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>:CivilianShip
+--
+
+--
+civilianShip()
+shipHit()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1140</x>
+      <y>240</y>
+      <w>260</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=10</panel_attributes>
+    <additional_attributes>10.0;10.0;110.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1760</x>
+      <y>320</y>
+      <w>180</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;70.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1880</x>
+      <y>120</y>
+      <w>60</w>
+      <h>460</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;210.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1880</x>
+      <y>520</y>
+      <w>240</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;100.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1880</x>
+      <y>120</y>
+      <w>240</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;100.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1360</x>
+      <y>740</y>
+      <w>420</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>:Coordinate
+--
+Across
+Down
+--
+Coordinate()
+getDown()
+getAcross()</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
