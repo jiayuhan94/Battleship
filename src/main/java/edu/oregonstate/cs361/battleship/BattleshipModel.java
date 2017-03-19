@@ -48,13 +48,8 @@ public class BattleshipModel {
         computerMisses = new ArrayList<>();
     }
 
-    public static BattleshipModel ofStatus(String statusStr) {
-        System.out.println("STRING");
-        return null;
-    }
-
     public Ship getShip(String shipName) {
-        if (shipName.equalsIgnoreCase("aircraftcarrier")) {
+        if (shipName.equalsIgnoreCase("aircraftCarrier")) {
             return aircraftCarrier;
         }
         if (shipName.equalsIgnoreCase("battleship")) {
@@ -68,6 +63,21 @@ public class BattleshipModel {
         }
         if (shipName.equalsIgnoreCase("submarine")) {
             return submarine;
+        }
+        if (shipName.equalsIgnoreCase("computer_aircraftCarrier")) {
+            return computer_aircraftCarrier;
+        }
+        if (shipName.equalsIgnoreCase("computer_battleship")) {
+            return computer_battleship;
+        }
+        if (shipName.equalsIgnoreCase("computer_clipper")) {
+            return computer_clipper;
+        }
+        if (shipName.equalsIgnoreCase("computer_dinghy")) {
+            return computer_dinghy;
+        }
+        if (shipName.equalsIgnoreCase("computer_submarine")) {
+            return computer_submarine;
         } else {
             return null;
         }
@@ -106,28 +116,28 @@ public class BattleshipModel {
         int colInt = Integer.parseInt(col);
         error_message = null;
         if(orientation.equals("horizontal")){
-            if (shipName.equalsIgnoreCase("aircraftcarrier")) {
-                playerplaceship("aircraftcarrier", new Coordinate(rowint,colInt),new Coordinate(rowint,colInt+4));
-            } if(shipName.equalsIgnoreCase("battleship")) {
+            if (shipName.equalsIgnoreCase("aircraftCarrier")) {
+                playerplaceship("aircraftCarrier", new Coordinate(rowint,colInt),new Coordinate(rowint,colInt+4));
+            }else if(shipName.equalsIgnoreCase("battleship")) {
                 playerplaceship("battleship", new Coordinate(rowint,colInt),new Coordinate(rowint,colInt+3));
-            } if(shipName.equalsIgnoreCase("clipper")) {
+            }else if(shipName.equalsIgnoreCase("clipper")) {
                 playerplaceship("clipper", new Coordinate(rowint,colInt),new Coordinate(rowint,colInt+2));
-            } if(shipName.equalsIgnoreCase("dinghy")) {
+            }else if(shipName.equalsIgnoreCase("dinghy")) {
                 playerplaceship("dinghy", new Coordinate(rowint,colInt),new Coordinate(rowint,colInt));
-            }if(shipName.equalsIgnoreCase("submarine")) {
+            }else if(shipName.equalsIgnoreCase("submarine")) {
                 playerplaceship("submarine", new Coordinate(rowint,colInt),new Coordinate(rowint,colInt+2));
             }
         } else {
             //vertical
-            if (shipName.equalsIgnoreCase("aircraftcarrier")) {
-                playerplaceship("aircraftcarrier", new Coordinate(rowint,colInt),new Coordinate(rowint+4,colInt));
-            } if(shipName.equalsIgnoreCase("battleship")) {
+            if (shipName.equalsIgnoreCase("aircraftCarrier")) {
+                playerplaceship("aircraftCarrier", new Coordinate(rowint,colInt),new Coordinate(rowint+4,colInt));
+            }else if(shipName.equalsIgnoreCase("battleship")) {
                 playerplaceship(    "battleship", new Coordinate(rowint,colInt),new Coordinate(rowint+3,colInt));
-            } if(shipName.equalsIgnoreCase("clipper")) {
+            }else if(shipName.equalsIgnoreCase("clipper")) {
                 playerplaceship("clipper", new Coordinate(rowint,colInt),new Coordinate(rowint+2,colInt));
-            } if(shipName.equalsIgnoreCase("dinghy")) {
+            }else if(shipName.equalsIgnoreCase("dinghy")) {
                 playerplaceship("dinghy", new Coordinate(rowint,colInt),new Coordinate(rowint,colInt));
-            }if(shipName.equalsIgnoreCase("submarine")) {
+            }else if(shipName.equalsIgnoreCase("submarine")) {
                 playerplaceship("submarine", new Coordinate(rowint,colInt),new Coordinate(rowint+2,colInt));
             }
         }
@@ -157,8 +167,8 @@ public class BattleshipModel {
         hardgenerate("computer_aircraftCarrier");
         hardgenerate("computer_battleship");
         hardgenerate("computer_submarine");
-        hardgenerate("computer_aircraftC");
-        hardgenerate("computer_aircraftCarrier");
+        hardgenerate("computer_clipper");
+        hardgenerate("computer_dinghy");
     }
 
     private void hardgenerate(String shipName){
@@ -177,7 +187,9 @@ public class BattleshipModel {
         else{//vertical
             y = randCol + l - 1;}
         Coordinate end = new Coordinate(x, y);
-        if(checkAIplace(start, end)){
+        if(x > 10 || y > 10){
+            hardgenerate(shipName);
+        } else if(checkAIplace(start, end)){
             getShip(shipName).setLocation(start, end);
         }else{hardgenerate(shipName);}
     }
@@ -314,7 +326,7 @@ public class BattleshipModel {
     }
 
     public void hardfire(){
-        if(aircraftCarrier.health != 0 || aircraftCarrier.health != 5){
+        if(aircraftCarrier.health != 0 && aircraftCarrier.health != 5){
             getnextpoint(aircraftCarrier.start, aircraftCarrier.end);
             if (shipCover("aircraftCarrier",nextpoint)) {
                 playerHits.add(nextpoint);
@@ -322,7 +334,7 @@ public class BattleshipModel {
                 playerMisses.add(nextpoint);
                 lasthit = false;
             }
-        }else if(battleship.health != 0 || battleship.health != 4){
+        }else if(battleship.health != 0 && battleship.health != 4){
             getnextpoint(battleship.start, battleship.end);
             if (shipCover("battleship",nextpoint)){
                 playerHits.add(nextpoint);
@@ -330,7 +342,7 @@ public class BattleshipModel {
                 playerMisses.add(nextpoint);
                 lasthit = false;
             }
-        }else if(submarine.health != 0 || submarine.health != 3){
+        }else if(submarine.health != 0 && submarine.health != 3){
             getnextpoint(submarine.start, submarine.end);
             if (shipCover("submarine",nextpoint)){
                 playerHits.add(nextpoint);
@@ -378,7 +390,7 @@ public class BattleshipModel {
         }
     }
 
-    public Coordinate getnextpoint(Coordinate start, Coordinate end){
+    public void getnextpoint(Coordinate start, Coordinate end){
         nextpoint = null;
         int x = 0;
         int y = 0;
@@ -389,7 +401,6 @@ public class BattleshipModel {
                 y += 1;
             }
             nextpoint = new Coordinate(x, y);
-            return nextpoint;
         }else{
             x = start.Across;
             y = start.Across;
@@ -397,7 +408,6 @@ public class BattleshipModel {
                 x += 1;
             }
             nextpoint = new Coordinate(x, y);
-            return nextpoint;
         }
     }
 
