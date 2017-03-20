@@ -63,8 +63,7 @@ public class BattleshipModel {
         }
         if (shipName.equalsIgnoreCase("submarine")) {
             return submarine;
-        }
-        if (shipName.equalsIgnoreCase("computer_aircraftCarrier")) {
+        }if (shipName.equalsIgnoreCase("computer_aircraftCarrier")) {
             return computer_aircraftCarrier;
         }
         if (shipName.equalsIgnoreCase("computer_battleship")) {
@@ -167,8 +166,8 @@ public class BattleshipModel {
         hardgenerate("computer_aircraftCarrier");
         hardgenerate("computer_battleship");
         hardgenerate("computer_submarine");
-        hardgenerate("computer_clipper");
         hardgenerate("computer_dinghy");
+        hardgenerate("computer_clipper");
     }
 
     private void hardgenerate(String shipName){
@@ -379,7 +378,7 @@ public class BattleshipModel {
 
 
     //each ship has a boolean to check whether the shot hits or misses, if hit, modify the game state
-    private boolean shipCover(String shipName, Coordinate coor){
+    public boolean shipCover(String shipName, Coordinate coor){
         if(getShip(shipName).covers(coor)){
             getShip(shipName).shipHit();
             checkplayerhealth(getShip(shipName).health);
