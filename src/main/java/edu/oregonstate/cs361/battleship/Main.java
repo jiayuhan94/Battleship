@@ -56,7 +56,7 @@ public class Main {
     }
 
     //This controller
-    private static String placeShip(Request req) {
+    public static String placeShip(Request req) {
         BattleshipModel currModel = getModelFromReq(req);
         String id = req.params("id");
         String row = req.params("row");
