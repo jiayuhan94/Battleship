@@ -10,7 +10,7 @@ public class CivilianShip extends Ship {
         length = l; //Does this affect only the dingy? The Clipper is suposed to be size 3. We can bring it up on Wednesday's meeting. -Stewart
         start = s;
         end = e;
-        health = l;
+        health = 1;
     }
     //overrides shipHit() in Ship object
     public void shipHit(){
