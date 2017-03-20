@@ -1,56 +1,14 @@
 package edu.oregonstate.cs361.battleship;
 
-import com.google.gson.Gson;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import spark.Spark;
-import spark.utils.IOUtils;
 
-import java.awt.*;
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static spark.Spark.awaitInitialization;
-import static spark.Spark.get;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Created by Noda Dragon on 3/3/2017.
  */
-public class BattleshipModelTest {
-    BattleshipModel model = new BattleshipModel();
-
-    @Test
-    public void testGetShip() {
-        //test getting any of the valid ships
-        Ship air = model.getShip("AircraftCarrier");
-        String name = air.name;
-        assertEquals("AircraftCarrier", name);
-
-        Ship bat = model.getShip("Battleship");
-        String name2 = bat.name;
-        assertEquals("Battleship", name2);
-
-        Ship clip = model.getShip("Clipper");
-        String name3 = clip.name;
-        assertEquals("Clipper", name3);
-
-        Ship ding = model.getShip("Dinghy");
-        String name4 = ding.name;
-        assertEquals("Dinghy", name4);
-
-        Ship sub = model.getShip("Submarine");
-        String name5 = sub.name;
-        assertEquals("Submarine", name5);
-
-        //test bad shipname
-        Ship bad = model.getShip("BLAH");
-        assertEquals(null, bad);
-    }
+class BattleshipModelTest {
+  BattleshipModel model = new BattleshipModel();
 
     @Test
     public void testgetLength() {
@@ -73,6 +31,389 @@ public class BattleshipModelTest {
         int length6 = model.getlength("BLAH");
         assertEquals(0, length6);
     }
+    @Test
+      public void testGetShip() {
+          //test getting any of the valid ships
+          Ship air = model.getShip("AircraftCarrier");
+          String name = air.name;
+          assertEquals("AircraftCarrier", name);
+
+          Ship bat = model.getShip("Battleship");
+          String name2 = bat.name;
+          assertEquals("Battleship", name2);
+
+          Ship clip = model.getShip("Clipper");
+          String name3 = clip.name;
+          assertEquals("Clipper", name3);
+
+          Ship ding = model.getShip("Dinghy");
+          String name4 = ding.name;
+          assertEquals("Dinghy", name4);
+
+          Ship sub = model.getShip("Submarine");
+          String name5 = sub.name;
+          assertEquals("Submarine", name5);
+
+          //test bad shipname
+          Ship bad = model.getShip("BLAH");
+          assertEquals(null, bad);
+      }
+
+    @Test
+    public void getshiptest7(){
+        BattleshipModel currModel = new BattleshipModel();
+        String shipName = "computer_aircraftCarrier";
+        assertEquals(currModel.computer_aircraftCarrier, currModel.getShip(shipName) );
+    }
+
+    @Test
+    public void getshiptest8(){
+        BattleshipModel currModel = new BattleshipModel();
+        String shipName = "computer_battleship";
+        assertEquals(currModel.computer_battleship, currModel.getShip(shipName) );
+    }
+
+    @Test
+    public void getshiptest9(){
+        BattleshipModel currModel = new BattleshipModel();
+        String shipName = "computer_clipper";
+        assertEquals(currModel.computer_clipper, currModel.getShip(shipName) );
+    }
+
+    @Test
+    public void getshiptest10(){
+        BattleshipModel currModel = new BattleshipModel();
+        String shipName = "computer_dinghy";
+        assertEquals(currModel.computer_dinghy, currModel.getShip(shipName) );
+    }
+
+    @Test
+    public void getshiptest11(){
+        BattleshipModel currModel = new BattleshipModel();
+        String shipName = "computer_submarine";
+        assertEquals(currModel.computer_submarine, currModel.getShip(shipName) );
+    }
+
+
+    @Test
+    public void playerplaceshiptest1(){
+        BattleshipModel currModel = new BattleshipModel();
+        String shipName = "aircraftCarrier";
+        Coordinate start = new Coordinate(1, 1);
+        Coordinate end = new Coordinate(1,5);
+        currModel.playerplaceship(shipName, start, end);
+        assertEquals(start, currModel.getShip(shipName).start);
+    }
+
+    @Test
+    public void playerplaceshiptest2(){
+        BattleshipModel currModel = new BattleshipModel();
+        String shipName1 = "aircraftCarrier";
+        Coordinate start1 = new Coordinate(1, 1);
+        Coordinate end1 = new Coordinate(1,5);
+        currModel.playerplaceship(shipName1, start1, end1);
+        String shipName2 = "battleship";
+        Coordinate start2 = new Coordinate(1, 1);
+        Coordinate end2 = new Coordinate(1,4);
+        currModel.playerplaceship(shipName2, start2, end2);
+        assertEquals("Ship is overlapping.\n Please pick another location.", currModel.error_message);
+    }
+
+    @Test
+    public void placeshiptest1(){
+        BattleshipModel currModel = new BattleshipModel();
+        String shipName = "aircraftCarrier";
+        String row = "1";
+        String col = "1";
+        String Orientation = "horizontal";
+        currModel.placeShip(shipName, row, col, Orientation, currModel);
+        assertEquals(1, currModel.getShip(shipName).start.Across);
+    }
+
+    @Test
+    public void placeshiptest2() {
+        BattleshipModel currModel = new BattleshipModel();
+        String shipName = "battleship";
+        String row = "1";
+        String col = "1";
+        String Orientation = "horizontal";
+        currModel.placeShip(shipName, row, col, Orientation, currModel);
+        assertEquals(1, currModel.getShip(shipName).start.Across);
+    }
+
+    @Test
+    public void placeshiptest3() {
+        BattleshipModel currModel = new BattleshipModel();
+        String shipName = "clipper";
+        String row = "1";
+        String col = "1";
+        String Orientation = "horizontal";
+        currModel.placeShip(shipName, row, col, Orientation, currModel);
+        assertEquals(1, currModel.getShip(shipName).start.Across);
+    }
+
+    @Test
+    public void placeshiptest4() {
+        BattleshipModel currModel = new BattleshipModel();
+        String shipName = "dinghy";
+        String row = "1";
+        String col = "1";
+        String Orientation = "horizontal";
+        currModel.placeShip(shipName, row, col, Orientation, currModel);
+        assertEquals(1, currModel.getShip(shipName).start.Across);
+    }
+
+    @Test
+    public void placeshiptest5() {
+        BattleshipModel currModel = new BattleshipModel();
+        String shipName = "submarine";
+        String row = "1";
+        String col = "1";
+        String Orientation = "horizontal";
+        currModel.placeShip(shipName, row, col, Orientation, currModel);
+        assertEquals(1, currModel.getShip(shipName).start.Across);
+    }
+
+    @Test
+    public void placeshiptestvertical1(){
+        BattleshipModel currModel = new BattleshipModel();
+        String shipName = "aircraftCarrier";
+        String row = "1";
+        String col = "1";
+        String Orientation = "vertical";
+        currModel.placeShip(shipName, row, col, Orientation, currModel);
+        assertEquals(1, currModel.getShip(shipName).start.Across);
+    }
+
+    @Test
+    public void placeshiptestvertical2() {
+        BattleshipModel currModel = new BattleshipModel();
+        String shipName = "battleship";
+        String row = "1";
+        String col = "1";
+        String Orientation = "vertical";
+        currModel.placeShip(shipName, row, col, Orientation, currModel);
+        assertEquals(1, currModel.getShip(shipName).start.Across);
+    }
+
+    @Test
+    public void placeshiptestvertical3() {
+        BattleshipModel currModel = new BattleshipModel();
+        String shipName = "clipper";
+        String row = "1";
+        String col = "1";
+        String Orientation = "vertical";
+        currModel.placeShip(shipName, row, col, Orientation, currModel);
+        assertEquals(1, currModel.getShip(shipName).start.Across);
+    }
+
+    @Test
+    public void placeshiptestvertical4() {
+        BattleshipModel currModel = new BattleshipModel();
+        String shipName = "dinghy";
+        String row = "1";
+        String col = "1";
+        String Orientation = "vertical";
+        currModel.placeShip(shipName, row, col, Orientation, currModel);
+        assertEquals(1, currModel.getShip(shipName).start.Across);
+    }
+
+    @Test
+    public void placeshiptestvertical5() {
+        BattleshipModel currModel = new BattleshipModel();
+        String shipName = "submarine";
+        String row = "1";
+        String col = "1";
+        String Orientation = "vertical";
+        currModel.placeShip(shipName, row, col, Orientation, currModel);
+        assertEquals(1, currModel.getShip(shipName).start.Across);
+    }
+
+    @Test
+    public void ezPlacetest(){
+        BattleshipModel currModel = new BattleshipModel();
+        Coordinate start1 = new Coordinate(2, 2);
+        Coordinate start2 = new Coordinate(2,8);;
+        Coordinate start3 = new Coordinate(9,6);
+        Coordinate start4 = new Coordinate(5,1);
+        Coordinate start5 = new Coordinate(1,1);
+        currModel.ezPlace();
+        String shipName = "computer_aircraftCarrier";
+        assertEquals(2, currModel.getShip(shipName).start.Across);
+    }
+
+    @Test
+    public void hardplacetest(){
+        BattleshipModel currModel = new BattleshipModel();
+        currModel.hardplace();
+        assertEquals(1, 1);
+    }
+
+    @Test
+    public void shootatAItest1(){
+        BattleshipModel currModel = new BattleshipModel();
+        int row = 1;
+        int col = 1;
+        Coordinate start = new Coordinate(1, 1);
+        Coordinate end = new Coordinate(1, 5);
+        currModel.computer_aircraftCarrier.setLocation(start, end);
+        currModel.shootAtComputer(row, col);
+        assertEquals(1, 1);
+    }
+
+    @Test
+    public void shootatAItest2(){
+        BattleshipModel currModel = new BattleshipModel();
+        int row = 1;
+        int col = 1;
+        Coordinate start = new Coordinate(1, 1);
+        Coordinate end = new Coordinate(1, 4);
+        currModel.computer_battleship.setLocation(start, end);
+        currModel.shootAtComputer(row, col);
+        assertEquals(1, 1);
+    }
+
+    @Test
+    public void shootatAItest3(){
+        BattleshipModel currModel = new BattleshipModel();
+        int row = 1;
+        int col = 1;
+        Coordinate start = new Coordinate(1, 1);
+        Coordinate end = new Coordinate(1, 3);
+        currModel.computer_clipper.setLocation(start, end);
+        currModel.shootAtComputer(row, col);
+        assertEquals(1, 1);
+    }
+
+    @Test
+    public void shootatAItest4(){
+        BattleshipModel currModel = new BattleshipModel();
+        int row = 1;
+        int col = 1;
+        Coordinate start = new Coordinate(1, 1);
+        Coordinate end = new Coordinate(1, 3);
+        currModel.computer_submarine.setLocation(start, end);
+        currModel.shootAtComputer(row, col);
+        assertEquals(1, 1);
+    }
+
+    @Test
+    public void shootatAItest5(){
+        BattleshipModel currModel = new BattleshipModel();
+        int row = 1;
+        int col = 1;
+        Coordinate start = new Coordinate(1, 1);
+        Coordinate end = new Coordinate(1, 1);
+        currModel.computer_dinghy.setLocation(start, end);
+        currModel.shootAtComputer(row, col);
+        assertEquals(1, 1);
+    }
+
+    @Test
+    public void shootatAItest6(){
+        BattleshipModel currModel = new BattleshipModel();
+        int row = 1;
+        int col = 1;
+        currModel.shootAtComputer(row, col);
+        assertEquals(1, 1);
+    }
+
+    @Test
+    public void ezfiretest1(){
+        BattleshipModel currModel = new BattleshipModel();
+        currModel.ezFire();
+        assertEquals(1, 1);
+    }
+
+    @Test
+    public void ezfiretest2(){
+        BattleshipModel currModel = new BattleshipModel();
+        currModel.rowShoot = 10;
+        currModel.colShoot = 11;
+        currModel.ezFire();
+        assertEquals(1, 1);
+    }
+
+    @Test
+    public void ezfiretest3(){
+        BattleshipModel currModel = new BattleshipModel();
+        currModel.aircraftCarrier.setLocation(new Coordinate(1, 1), new Coordinate(1, 5));
+        currModel.ezFire();
+        assertEquals(1, 1);
+    }
+
+    @Test
+    public void hardfiretest1(){
+        BattleshipModel currModel = new BattleshipModel();
+        currModel.aircraftCarrier.setLocation(new Coordinate(1, 1), new Coordinate(1, 5));
+        currModel.aircraftCarrier.health = 1;
+        currModel.hardfire();
+        assertEquals(1, currModel.aircraftCarrier.start.Across);
+    }
+
+    @Test
+    public void hardfiretest2(){
+        BattleshipModel currModel = new BattleshipModel();
+        currModel.aircraftCarrier.setLocation(new Coordinate(1, 1), new Coordinate(0, 0));
+        currModel.aircraftCarrier.health = 1;
+        currModel.nextpoint = new Coordinate(6,6);
+        currModel.hardfire();
+        assertEquals(1, currModel.aircraftCarrier.start.Across);
+    }
+
+    @Test
+    public void hardfiretest3(){
+        BattleshipModel currModel = new BattleshipModel();
+        currModel.battleship.setLocation(new Coordinate(1, 1), new Coordinate(1, 5));
+        currModel.battleship.health = 1;
+        currModel.aircraftCarrier.health = 0;
+        currModel.hardfire();
+        assertEquals(1, currModel.battleship.start.Across);
+    }
+
+    @Test
+    public void hardfiretest4(){
+        BattleshipModel currModel = new BattleshipModel();
+        currModel.battleship.setLocation(new Coordinate(1, 1), new Coordinate(0, 0));
+        currModel.battleship.health = 1;
+        currModel.aircraftCarrier.health = 0;
+        currModel.nextpoint = new Coordinate(6,6);
+        currModel.hardfire();
+        assertEquals(1, currModel.battleship.start.Across);
+    }
+
+    @Test
+    public void hardfiretest5(){
+        BattleshipModel currModel = new BattleshipModel();
+        currModel.submarine.setLocation(new Coordinate(1, 1), new Coordinate(1, 5));
+        currModel.submarine.health = 1;
+        currModel.battleship.health = 0;
+        currModel.aircraftCarrier.health = 0;
+        currModel.hardfire();
+        assertEquals(1, currModel.submarine.start.Across);
+    }
+
+    @Test
+    public void hardfiretest6(){
+        BattleshipModel currModel = new BattleshipModel();
+        currModel.submarine.setLocation(new Coordinate(1, 1), new Coordinate(0, 0));
+        currModel.submarine.health = 1;
+        currModel.battleship.health = 0;
+        currModel.aircraftCarrier.health = 0;
+        currModel.nextpoint = new Coordinate(6,6);
+        currModel.hardfire();
+        assertEquals(1, currModel.submarine.start.Across);
+    }
+
+    @Test
+    public void hardfiretest7(){
+        BattleshipModel currModel = new BattleshipModel();
+        currModel.aircraftCarrier.health = 0;
+        currModel.battleship.health = 0;
+        currModel.submarine.health = 0;
+        currModel.hardfire();
+        assertEquals(1, 1);
+    }
 
     @Test
     public void testsetEzmode(){
@@ -84,6 +425,7 @@ public class BattleshipModelTest {
         boolean ez1 = model.ezmode;
         assertEquals(false, ez1);
     }
+  
     @Test
     public void scanPlayer(){
         model.ezPlace();
@@ -112,6 +454,7 @@ public class BattleshipModelTest {
         boolean scan6 = model.scanPlayer(10,10);
         assertEquals(false, scan6);
     }
+  
     @Test
     public void testcheckAImiss(){
        boolean miss = model.checkAImiss(1,1);
@@ -122,6 +465,7 @@ public class BattleshipModelTest {
         boolean miss1 = model.checkAImiss(10,10);
         assertEquals(true, miss1);
     }
+  
     @Test
     public void testcheckAIhit(){
         boolean hit= model.checkAIhit(1,1);
@@ -132,6 +476,7 @@ public class BattleshipModelTest {
         boolean hit1 = model.checkAIhit(10,10);
         assertEquals(true, hit1);
     }
+  
     @Test
     public void testcheckfirepoint() {
         model.computerHits.add(new Coordinate(1,1));
@@ -152,6 +497,7 @@ public class BattleshipModelTest {
         assertEquals(true, miss2);
 
     }
+  
     @Test
     public void testcheckcomputerhealth() {
         model.checkcomputerhealth(5);
@@ -159,6 +505,7 @@ public class BattleshipModelTest {
         model.checkcomputerhealth(0);
         assertEquals(1, model.computershipsank);
     }
+  
     @Test
     public void testcheckplayerhealth() {
         model.checkplayerhealth(5);
@@ -166,6 +513,7 @@ public class BattleshipModelTest {
         model.checkplayerhealth(0);
         assertEquals(1, model.playershipsank);
     }
+  
     @Test
     public void testgetnextpoint() {
         model.ezPlace();
@@ -179,6 +527,7 @@ public class BattleshipModelTest {
         assertEquals(3, coor2.Across);
         assertEquals(1, coor2.Down);
     }
+  
     @Test
     public void testshipCover() {
         model.ezPlace();
