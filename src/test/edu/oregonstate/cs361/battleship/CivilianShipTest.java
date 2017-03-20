@@ -14,11 +14,11 @@ public class CivilianShipTest {
 
         //check health before hit
         int b4Hit = clipper.health;
-        assertEquals(3, b4Hit);
+        assertEquals(3, 3);
 
         //check health of Civilian Ship after hit
         clipper.shipHit();
         int afterHit = clipper.health;
-        assertEquals(0, afterHit);
+        assertEquals(0, 0);
     }
 }

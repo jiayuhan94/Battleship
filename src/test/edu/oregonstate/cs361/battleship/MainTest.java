@@ -7,16 +7,15 @@ import org.junit.jupiter.api.Test;
 import spark.Spark;
 import spark.utils.IOUtils;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 import static spark.Spark.awaitInitialization;
-import static spark.Spark.get;
 
 
 /**

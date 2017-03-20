@@ -417,13 +417,13 @@ class BattleshipModelTest {
 
     @Test
     public void testsetEzmode(){
-        model = model.setEzmode(0, model);
+        model = model.setEzmode("hard", model);
         boolean ez = model.ezmode;
-        assertEquals(true, ez);
+        assertEquals(false, ez);
 
-        model = model.setEzmode(1, model);
+        model = model.setEzmode("easy", model);
         boolean ez1 = model.ezmode;
-        assertEquals(false, ez1);
+        assertEquals(true, ez1);
     }
   
     @Test
@@ -519,11 +519,13 @@ class BattleshipModelTest {
         model.ezPlace();
         model.playerHits.add(new Coordinate(1,1));
         model.playerHits.add(new Coordinate(2,1));
-        Coordinate coor = model.getnextpoint(new Coordinate(1,1),new Coordinate(1,1));
+        model.getnextpoint(new Coordinate(1,1),new Coordinate(1,1));
+        Coordinate coor = model.nextpoint;
         assertEquals(1, coor.Across);
         assertEquals(2, coor.Down);
 
-        Coordinate coor2 = model.getnextpoint(new Coordinate(1,1),new Coordinate(2,1));
+        model.getnextpoint(new Coordinate(1,1),new Coordinate(2,1));
+        Coordinate coor2 = model.nextpoint;
         assertEquals(3, coor2.Across);
         assertEquals(1, coor2.Down);
     }
