@@ -49,13 +49,10 @@ class MainTest {
     }
     @Test
     public void testnewModel() {
+        BattleshipModel model = new BattleshipModel();
+        Gson gson = new Gson();
         String res1 = Main.newModel();
-        assertEquals(200, res1);
-    }
-    @Test
-    public void testnewModel1() {
-        String res1 = Main.newModel();
-        assertEquals(200, res1);
+        assertEquals(gson.toJson(model), res1);
     }
 
     private TestResponse request(String method, String path) {

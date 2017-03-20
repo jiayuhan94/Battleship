@@ -42,7 +42,7 @@ public class Ship {
             }
         }
         //vertical
-        else {
+        else if(start.getDown() == end.getDown()){
             if (test.getDown() == start.getDown()) {  //Same as previous. -Stewart
                 if ((test.getAcross() >= start.getAcross()) &&
                         (test.getAcross() <= end.getAcross()))
